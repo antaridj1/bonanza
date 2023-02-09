@@ -35,56 +35,23 @@ class BarangController extends Controller
 
     public function store(Request $request)
     {
-        if (!$request->ukuran)
-        {
             $request->validate([
                 'nama'=> 'required',
                 'harga_satuan'=>'required|numeric|min:1',
-                'harga_paket'=>'required|numeric|min:1',
-                'jumlah_paket'=>'required|numeric|min:1',
                 'stok'=>'required|numeric|min:0',
                 'keterangan'=>'required'
             ]);
 
-            $slug = Str::of($request->nama)->append(' ')->append( $request->ukuran);
-            // $slug = Str::slug($text, '-');
+            // $slug = Str::of($request->nama)->append(' ')->append( $request->ukuran);
 
             Barang::create([
                 'nama'=> $request->nama,
                 'harga_satuan'=>$request->harga_satuan,
-                'harga_paket'=>$request->harga_paket,
-                'jumlah_paket'=>$request->jumlah_paket,
                 'stok'=>$request->stok,
                 'keterangan'=>$request->keterangan,
-                'slug'=>$slug,
-            ]);
-        }
-        else
-        {
-            $request->validate([
-                'nama'=> 'required',
-                'ukuran'=>'required',
-                'harga_satuan'=>'required|numeric|min:1',
-                'harga_paket'=>'required|numeric|min:1',
-                'jumlah_paket'=>'required|numeric|min:1',
-                'stok'=>'required|numeric|min:0',
-                'keterangan'=>'required'
+                // 'slug'=>$slug,
             ]);
 
-            $slug = Str::of($request->nama)->append(' ')->append( $request->ukuran);
-            // $slug = Str::slug($text, '-');
-
-            Barang::create([
-                'nama'=> $request->nama,
-                'ukuran'=>$request->ukuran,
-                'harga_satuan'=>$request->harga_satuan,
-                'harga_paket'=>$request->harga_paket,
-                'jumlah_paket'=>$request->jumlah_paket,
-                'stok'=>$request->stok,
-                'keterangan'=>$request->keterangan,
-                'slug'=>$slug,
-            ]);
-        }
         return redirect('barang')
             ->with('status','success')
             ->with('message','Berhasil menambahkan data');
@@ -104,40 +71,18 @@ class BarangController extends Controller
      */
     public function update(Request $request, Barang $barang)
     { 
-        $slug = Str::of($request->nama)->append(' ')->append( $request->ukuran);
-
-        if (!$request->ukuran)
-        {
-            $edit = $request->validate([
-                    'nama'=> 'required',
-                    'harga_satuan'=>'required|numeric|min:1',
-                    'harga_paket'=>'required|numeric|min:1',
-                    'jumlah_paket'=>'required|numeric|min:1',
-                    'stok'=>'required|numeric|min:0',
-                    'keterangan'=>'required'
-                    ]);
-        }
-        else
-        {
-            $edit = $request->validate([
+        $edit = $request->validate([
                 'nama'=> 'required',
-                'ukuran' => 'required',
                 'harga_satuan'=>'required|numeric|min:1',
-                'harga_paket'=>'required|numeric|min:1',
-                'jumlah_paket'=>'required|numeric|min:1',
                 'stok'=>'required|numeric|min:0',
                 'keterangan'=>'required'
-                ]); 
-        }
+                ]);
+        
         $barang->update([
             'nama'=> $request->nama,
-            'ukuran' => $request->ukuran,
             'harga_satuan'=>$request->harga_satuan,
-            'harga_paket'=>$request->harga_paket,
-            'jumlah_paket'=>$request->jumlah_paket,
             'stok'=>$request->stok,
             'keterangan'=>$request->keterangan,
-            'slug'=>$slug
         ]);
         return redirect('barang')
             ->with('status','success')

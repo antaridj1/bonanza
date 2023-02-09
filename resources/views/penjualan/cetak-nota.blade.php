@@ -48,23 +48,12 @@
                     @endphp
                     @foreach ($penjualan->detail_barang as $barang)
                     <tr>
-                        <td>{{ $barang->barang->nama }} {{ $barang->barang->ukuran }}</td>
-                        
-                        @if ($barang->satuan == "Buah")
-                            <td>{{ $barang->jumlah }} {{ $barang->satuan }}</td>
-                            <td class="text-right">{{ number_format($barang->barang->harga_satuan,0) }}</td>
-                            @php
-                                $tot = $barang->barang->harga_satuan * $barang->jumlah;
-                            @endphp
-                        @else
-                            @php
-                                $jml = $barang->jumlah/$barang->barang->jumlah_paket;
-                                $tot = $barang->barang->harga_paket * $jml;
-                            @endphp
-                            <td>{{ $jml }} {{ $barang->satuan }}</td>
-                            <td class="text-right">{{ number_format($barang->barang->harga_paket,0) }}</td>
-                            
-                        @endif
+                        <td>{{ $barang->barang->nama }}</td>
+                        <td>{{ $barang->jumlah }} Kg</td>
+                        <td class="text-right">{{ number_format($barang->barang->harga_satuan,0) }}</td>
+                        @php
+                            $tot = $barang->barang->harga_satuan * $barang->jumlah;
+                        @endphp
                         <td class="text-right">{{ number_format($tot,0) }}</td>
                     </tr>
                     @endforeach

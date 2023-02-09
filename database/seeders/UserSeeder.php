@@ -16,8 +16,8 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'nama' => 'Dewita',
-                'username' => 'dewita123',
+                'nama' => 'Pemilik',
+                'username' => 'pemilik123',
                 'password'=> bcrypt('123'),
                 'alamat'=> 'Jalan Imam Bojol No.1',
                 'telp'=>'089678678678',
@@ -25,8 +25,8 @@ class UserSeeder extends Seeder
                 'status'=>true,
             ],
             [
-                'nama' => 'Antari',
-                'username' => 'antari123',
+                'nama' => 'Admin',
+                'username' => 'admin123',
                 'password'=> bcrypt('123'),
                 'alamat'=> 'Jalan Imam Bojol No.2',
                 'telp'=>'089678678677',

@@ -38,47 +38,11 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="ukuran">Ukuran<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control @error('ukuran') is-invalid @enderror" id="ukuran" name="ukuran" value="{{ @old('ukuran') }}">
-                                        @error('ukuran')
-                                            <div class="invalid-feedback">
-                                                {{$message}}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="harga_satuan">Harga Satuan<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control @error('harga_satuan') is-invalid @enderror" id="harga_satuan" name="harga_satuan" value="{{ @old('harga_satuan') }}">
                                         @error('harga_satuan')
-                                            <div class="invalid-feedback">
-                                                {{$message}}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="harga_paket">Harga Paket<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control @error('harga_paket') is-invalid @enderror" id="harga_paket" name="harga_paket" value="{{ @old('harga_paket') }}">
-                                        @error('harga_paket')
-                                            <div class="invalid-feedback">
-                                                {{$message}}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="jumlah_paket">Jumlah per Paket<span class="text-danger">*</span>
-                                    </label>
-                                    <div class="col-lg-6">
-                                        <input type="text" class="form-control @error('jumlah_paket') is-invalid @enderror" id="jumlah_paket" name="jumlah_paket" value="{{ @old('jumlah_paket') }}">
-                                        @error('jumlah_paket')
                                             <div class="invalid-feedback">
                                                 {{$message}}
                                             </div>

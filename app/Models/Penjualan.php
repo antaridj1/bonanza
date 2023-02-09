@@ -14,6 +14,7 @@ class Penjualan extends Model
         'nama',
         'telp',
         'alamat',
+        'tanggal_pemesanan',
         'total_harga',
         'karyawans_id',
         'status'

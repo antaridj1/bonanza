@@ -18,10 +18,10 @@ class CreatePenjualansTable extends Migration
             $table->string('nama',50);
             $table->string('telp',15);
             $table->text('alamat');
+            $table->date('tanggal_pemesanan');
             $table->integer('total_harga');
             $table->unsignedBigInteger('karyawans_id');
             $table->foreign('karyawans_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

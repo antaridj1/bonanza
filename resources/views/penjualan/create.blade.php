@@ -62,7 +62,19 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="search">Barang<span class="text-danger">*</span>
+                                    <label class="col-lg-4 col-form-label" for="tanggal_pemesanan">Tgl Pemesanan<span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input type="date" class="form-control @error('tanggal_pemesanan') is-invalid @enderror" id="tanggal_pemesanan" name="tanggal_pemesanan" value="{{ @old('tanggal_pemesanan') }}">
+                                        @error('tanggal_pemesanan')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-lg-4 col-form-label" for="search">Ikan<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
                                         <div class="form-group mt-2">
@@ -70,13 +82,9 @@
                                                 <select class="form-control @error('barang') is-invalid @enderror" 
                                                     aria-label=".form-select-sm example"
                                                     id="select_barang">
-                                                        <option value="">-- Tambahkan Barang --</option>
+                                                        <option value="">-- Tambahkan Ikan --</option>
                                                     @foreach ($barangs as $barang)
-                                                        @if($barang->ukuran !== null)
-                                                            <option value="{{ $barang->id }}">{{ $barang->nama }} {{ $barang->ukuran }}</option>
-                                                        @else
-                                                            <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
-                                                        @endif
+                                                        <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
                                                     @endforeach
                                                 </select>
                                                 <span class="input-group-append">
@@ -97,7 +105,7 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Nama Barang</th>
+                                            <th>Nama Ikan</th>
                                             <th class="text-center">Jumlah</th>
                                             <th class="text-right">Harga (Rp)</th>
                                             <th class="text-right">Total (Rp)</th>
@@ -157,14 +165,9 @@ $(document).ready(function(){
                                 <td>'+reqNama+'<input type="hidden" name="barang[]" value="'+barang.id+'"></td>\
                                 <td><div class="d-flex">\
                                         <input type="text" class="form-control input-group-sm input" style="height:auto" min="1" value="1" name="jumlah[]">\
-                                        <select class="form-select custom-select" style="width:auto" name="satuan[]" aria-label=".form-select-sm example">\
-                                            <option value="Buah">Buah</option>\
-                                            <option value="Paket">Paket</option>\
-                                        </select>\
                                     </div>\
                                 </td>\
                                 <td class="harga_satuan text-right">'+barang.harga_satuan+'</td>\
-                                <td class="harga_paket text-right" style="display:none">'+barang.harga_paket+'</td>\
                                 <td class="total text-right">'+barang.harga_satuan+'</td>\
                                 <td class="hapus text-center"><i class="fa fa-trash"></i></td>\
                             </tr>'
@@ -187,22 +190,15 @@ $(document).ready(function(){
 
             $.each(tr, function(index, value){
                 let harga_satuan = tr.eq(index).find('.harga_satuan');
-                let harga_paket = tr.eq(index).find('.harga_paket');
                 let harga_total = tr.eq(index).find('.total');
                 let input = tr.eq(index).find('input[type=text]');
                 let select = tr.eq(index).find('select');
                 let hapus = tr.eq(index).find('.fa-trash');
 
                 select.on('change',function(){
-                    if(select.val() == "Paket"){
-                        harga_satuan.hide();
-                        harga_paket.show();
-                        var harga = harga_paket.text();
-                    }else{
-                        harga_satuan.show();
-                        harga_paket.hide();
-                        var harga = harga_satuan.text();
-                    }
+                    harga_satuan.show();
+                    var harga = harga_satuan.text();
+                    
                     let jml = input.val();
                     let total = jml * harga;
                     harga_total.text(total);
@@ -211,11 +207,7 @@ $(document).ready(function(){
                 });
 
                 input.on('keyup',function(){
-                    if(select.val() == "Paket"){
-                        var harga = harga_paket.text();
-                    }else{
-                        var harga = harga_satuan.text();
-                    }
+                    var harga = harga_satuan.text();
                     let jml = input.val();
                     let total = jml * harga;
                     harga_total.text(total);

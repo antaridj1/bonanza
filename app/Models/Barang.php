@@ -11,13 +11,9 @@ class Barang extends Model
 
     protected $fillable = [
         'nama',
-        'ukuran',
         'harga_satuan',
-        'harga_paket',
-        'jumlah_paket',
         'stok',
         'keterangan',
-        'slug'
     ];
     // protected $guarded = 'id';
 
@@ -29,10 +25,7 @@ class Barang extends Model
     public function scopeCari($query, array $cari){
         $query->when($cari['search'] ?? false, function($query, $search) {
             return $query->where('nama','like','%'.$search.'%')
-                        ->orWhere('ukuran','like','%'.$search.'%')
-                        ->orWhere('harga_satuan','like','%'.$search.'%')
-                        ->orWhere('harga_paket','like','%'.$search.'%')
-                        ->orWhere('jumlah_paket','like','%'.$search.'%');
+                        ->orWhere('harga_satuan','like','%'.$search.'%');
         });
     }
 }

@@ -12,9 +12,9 @@
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
                                 <div class="text-center">
-                                    <img src="{{asset('assets/images/Logo-abu.png')}}" width="150px" alt="">
+                                    <img src="{{asset('assets/images/color-logo.svg')}}" width="200px" alt="">
                                 </div>
-                                <form action="/login" method="post" class="mt-5 mb-5 login-input">
+                                <form action="/login" method="post" class="mt-2 mb-5 login-input">
                                     @csrf
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Username" name="username">

@@ -46,7 +46,6 @@ class PenjualanController extends Controller
     {
         $reqBarang = collect($request->barang);
         $reqJumlah = collect($request->jumlah);
-        $reqSatuan = collect($request->satuan);
         $index = count($reqBarang);
 
         $user_id = Auth::id();
@@ -55,26 +54,24 @@ class PenjualanController extends Controller
             'nama'=> 'required',
             'telp'=>'required',
             'alamat'=>'required',
+            'tanggal_pemesanan' => 'required'
         ]);
 
         $penjualan = Penjualan::create([
             'nama'=> $request->nama,
             'telp'=> $request->telp,
             'alamat'=> $request->alamat,
+            'tanggal_pemesanan' => Carbon::parse($request->tanggal_pemesanan),
             'total_harga'=>$request->total_harga,
             'karyawans_id' => $user_id
         ]);
 
         for($i=0;$i<$index;$i++){
-            if ($reqSatuan[$i] == "Paket"){
-                $jml_paket = Barang::where('id',$reqBarang[$i])->value('jumlah_paket');
-                $reqJumlah[$i] = $reqJumlah[$i] * $jml_paket;
-            }
+
             DetailBarang::create([
                 'barangs_id' => $reqBarang[$i],
                 'penjualans_id' => $penjualan->id,
                 'jumlah' => $reqJumlah[$i],
-                'satuan' => $reqSatuan[$i],
             ]);
 
             $stok = Barang::where('id',$reqBarang[$i])->value('stok');
@@ -84,7 +81,7 @@ class PenjualanController extends Controller
                 'stok' => $sisa
             ]);
         }
-        return redirect('penjualan/nota')
+        return redirect('penjualan/create')
             ->with('status','success')
             ->with('message','Berhasil menambahkan data');
     }

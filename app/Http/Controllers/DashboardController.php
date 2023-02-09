@@ -26,24 +26,19 @@ class DashboardController extends Controller
 
     public function indexKaryawan(){
         $year = Carbon::now()->year; 
-        
         $id = Auth::id();
+        $stok_kosong = count(Barang::where('stok','0')->get());
         $penjualans = Penjualan::where('karyawans_id',$id)->get();
-        $penjualan = Penjualan::where('karyawans_id',$id)->where('status','1')->orderBy('created_at','DESC')->first();
-        $belum_proses = $penjualans->where('status','0')->first();
-        $jml_belum_proses = count($penjualans->where('status','0'));
+        $penjualan = Penjualan::where('karyawans_id',$id)->orderBy('created_at','DESC')->first();
         $penjualan_per_tahun = count(Penjualan::where('karyawans_id',$id)->whereYear('created_at',$year)->pluck('id'));
-        return view('dashboard-karyawan',compact(['penjualans','penjualan','belum_proses','penjualan_per_tahun','jml_belum_proses']));
+        return view('dashboard-karyawan',compact(['penjualans','penjualan','penjualan_per_tahun','stok_kosong']));
     }
 
     public function getBarangs(Request $request){
         $year = Carbon::now()->year;
 
-        $barangs = Barang::pluck('slug');
-        $jumlah = DetailBarang::whereHas('penjualan',function($q){
-            $q->where('status',true);
-        })
-            ->selectRaw('year(created_at) year, barangs_id, sum(jumlah) as sum')
+        $barangs = Barang::pluck('nama');
+        $jumlah = DetailBarang::selectRaw('year(created_at) year, barangs_id, sum(jumlah) as sum')
             ->whereYear('created_at',$year)
             ->groupBy('year','barangs_id')
             ->orderBy('barangs_id')

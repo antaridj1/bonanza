@@ -36,11 +36,7 @@
                                                 id="select_barang" name="nama">
                                                     <option value="">-- Tambahkan Barang --</option>
                                                 @foreach ($barangs as $barang)
-                                                    @if($barang->ukuran !== null)
-                                                        <option value="{{ $barang->id }}">{{ $barang->nama }} {{ $barang->ukuran }}</option>
-                                                    @else
-                                                        <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
-                                                    @endif
+                                                    <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div> 

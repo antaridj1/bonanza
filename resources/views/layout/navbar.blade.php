@@ -2,9 +2,9 @@
 <div class="nav-header">
     <div class="brand-logo">
         <a href="index.html">
-            <b class="logo-abbr"><img src="{{asset('assets/images/logo.png')}}" alt=""> </b>
+            <b class="logo-abbr"><img src="{{asset('assets/images/logo-white.png')}}" alt=""> </b>
             <span class="brand-title">
-                <img src="{{asset('assets/images/logo-text.png')}}" width="140px" alt="">
+                <img src="{{asset('assets/images/white-logo.svg')}}" width="160px" alt="">
             </span>
         </a>
     </div>

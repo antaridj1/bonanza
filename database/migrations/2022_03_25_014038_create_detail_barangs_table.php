@@ -20,7 +20,6 @@ class CreateDetailBarangsTable extends Migration
             $table->foreign('barangs_id')->references('id')->on('barangs');
             $table->foreign('penjualans_id')->references('id')->on('penjualans')->onDelete('cascade');
             $table->integer('jumlah')->unsigned();
-            $table->string('satuan');
             $table->timestamps();
         });
     }

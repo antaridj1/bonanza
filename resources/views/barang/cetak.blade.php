@@ -24,10 +24,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Nama</th>
-                                    <th>Ukuran</th>
                                     <th>Harga Satuan</th>
-                                    <th>Harga Paket</th>
-                                    <th>Jumlah per Paket</th>
                                     <th>Stok</th>
                                 </tr>
                             </thead>
@@ -36,10 +33,7 @@
                             <tr> 
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$barang->nama}}</td>
-                                <td>{{$barang->ukuran}}</td>
                                 <td>{{$barang->harga_satuan}}</td>
-                                <td>{{$barang->harga_paket}}</td>
-                                <td>{{$barang->jumlah_paket}}</td>
                                 <td>{{$barang->stok}}</td>
                             </tr>
                             @endforeach

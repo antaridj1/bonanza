@@ -37,9 +37,11 @@
                             <div class="dropdown">
                                 <a href="{{ route('pengeluaran.cetak') }}" class="btn btn-secondary shadow-sm mx-2">Cetak PDF</a>
                             </div>
+                            @if(auth()->user()->isOwner == false)
                             <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#ModalTambah">
                                 Tambahkan Pengeluaran
                             </button>
+                            @endif
                         
                         </div>
                         {{-- tabel --}}

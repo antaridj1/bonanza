@@ -37,9 +37,11 @@
                             <div class="dropdown">
                                 <a href="{{ route('barang.cetak') }}" class="btn btn-secondary shadow-sm mx-2">Cetak PDF</a>
                             </div>
+                            @if(auth()->user()->isOwner == false)
                             <a href="{{route('barang.create')}}" class="btn btn-primary mb-3">
                                 Tambahkan Data
                             </a>
+                            @endif
                         </div>
 
                         <div class="table-responsive">
@@ -48,10 +50,7 @@
                                 <tr>
                                     <th>No.</th>
                                     <th>Nama</th>
-                                    <th>Ukuran</th>
                                     <th>Harga Satuan</th>
-                                    <th>Harga Paket</th>
-                                    <th>Jumlah per Paket</th>
                                     <th>Stok</th>
                                     <th>Keterangan</th>
                                     <th>Aksi</th>
@@ -62,10 +61,7 @@
                             <tr> 
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$barang->nama}}</td>
-                                <td>{{$barang->ukuran}}</td>
                                 <td>{{number_format($barang->harga_satuan,0)}}</td>
-                                <td>{{number_format($barang->harga_paket,0)}}</td>
-                                <td>{{$barang->jumlah_paket}}</td>
                                 <td>{{$barang->stok}}</td>
                                 
                                 <td><a href="{{route('barang.index', $barang->id)}}" class="label label-primary" 
