@@ -37,12 +37,24 @@ class DashboardController extends Controller
     public function getBarangs(Request $request){
         $year = Carbon::now()->year;
 
+        $data_barangs = Barang::pluck('nama','id');
         $barangs = Barang::pluck('nama');
-        $jumlah = DetailBarang::selectRaw('year(created_at) year, barangs_id, sum(jumlah) as sum')
+        $data_jumlah = DetailBarang::selectRaw('year(created_at) year, barangs_id, sum(jumlah) as sum')
             ->whereYear('created_at',$year)
             ->groupBy('year','barangs_id')
             ->orderBy('barangs_id')
-            ->pluck('sum');
+            ->get()->toArray();
+
+            $jumlah = [];
+
+            foreach ($data_barangs as $id => $barang) {
+                $id = array_search($id, array_column($data_jumlah, 'barangs_id'));
+                $data = $id === false ? 0 : $data_jumlah[$id]['sum'];
+                array_push($jumlah, $data);
+            }
+
+           
+            // dd($jumlah);
         //$jumlah = DetailBarang::orderBy('barangs_id')->groupBy('barangs_id')->selectRaw('sum(jumlah) as sum')->pluck('sum');
         return response()->json(array($barangs,$jumlah));
     }
@@ -55,9 +67,8 @@ class DashboardController extends Controller
                     ->orderBy('month','DESC')
                     ->get()->toArray();
     
-        $pemasukans = Penjualan::selectRaw('year(created_at) year, monthname(created_at) month, sum(total_harga) as sum')
-                    ->where('status',true)
-                    ->whereYear('created_at',$year)
+        $pemasukans = Penjualan::selectRaw('year(tanggal_pemesanan) year, monthname(tanggal_pemesanan) month, sum(total_harga) as sum')
+                    ->whereYear('tanggal_pemesanan',$year)
                     ->groupBy('year','month')
                     ->orderBy('month','DESC')
                     ->get()->toArray();

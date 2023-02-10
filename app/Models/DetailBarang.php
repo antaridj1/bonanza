@@ -13,7 +13,6 @@ class DetailBarang extends Model
         'barangs_id',
         'penjualans_id',
         'jumlah',
-        'satuan',
     ];
 
     public function barang()

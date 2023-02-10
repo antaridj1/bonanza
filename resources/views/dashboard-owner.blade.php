@@ -9,7 +9,7 @@
 <div class="content-body">
     <div class="container-fluid mt-3">
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card gradient-4">
                     <div class="card-body">
                         <h3 class="card-title text-white">Penjualan</h3>
@@ -21,7 +21,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card gradient-1">
                     <div class="card-body">
                         <h3 class="card-title text-white">Profit</h3>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card gradient-2">
                     <div class="card-body">
                         <h3 class="card-title text-white">Stok Kosong</h3>
@@ -45,7 +45,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-12">
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card gradient-3">
                     <div class="card-body">
                         <h3 class="card-title text-white">Ikan Terjual </h3>

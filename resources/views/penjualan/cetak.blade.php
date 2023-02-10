@@ -28,7 +28,7 @@
                 @foreach ($penjualans as $penjualan)
                 <tr> 
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$penjualan->tanggal_pemesanan->format('d M Y')}}</td>
+                    <td>{{$penjualan->tanggal_pemesanan}}</td>
                     <td>{{$penjualan->nama}}</td>
                     <td>{{$penjualan->alamat}}</td>
                     <td>{{number_format($penjualan->total_harga,0)}}</td>
