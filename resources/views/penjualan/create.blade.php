@@ -106,7 +106,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nama Ikan</th>
-                                            <th class="text-center">Jumlah</th>
+                                            <th class="text-center">Jumlah (kg)</th>
                                             <th class="text-right">Harga (Rp)</th>
                                             <th class="text-right">Total (Rp)</th>
                                             <th class="text-center">Aksi</th>
@@ -159,24 +159,69 @@ $(document).ready(function(){
             const tabel = $("#tabel_barang");
             $.each(barangs, function(i,barang){
                 let reqNama = $("#select_barang").find('option:selected').text();
-                    if( barang.id == reqBarang){
-                            tabel.append(
-                            '<tr id="'+barang.id+'">\
-                                <td>'+reqNama+'<input type="hidden" name="barang[]" value="'+barang.id+'"></td>\
-                                <td><div class="d-flex">\
-                                        <input type="text" class="form-control input-group-sm input" style="height:auto" min="1" value="1" name="jumlah[]">\
-                                    </div>\
-                                </td>\
-                                <td class="harga_satuan text-right">'+barang.harga_satuan+'</td>\
-                                <td class="total text-right">'+barang.harga_satuan+'</td>\
-                                <td class="hapus text-center"><i class="fa fa-trash"></i></td>\
-                            </tr>'
-                            );
-                    }
-            });
+                if( barang.id == reqBarang){
+                    
 
-            //select satuan
-            let tr = tabel.find('tr');
+                    tabel.append(
+                        `<tr id="${parseInt(i)+1}">
+                            <td>${reqNama}<input type="hidden" name="barang[]" value="${barang.id}"></td>
+                            <td><div class="d-flex">
+                                <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <button class="btn btn-outline-dark qty-min" type="button"> <i class="fa fa-minus"></i></button>
+                                        </div>
+                                        <input type="text" readonly class="form-control input-group-sm input" style="height:auto; width:10px;" min="10" value="10" name="jumlah[]">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-outline-dark qty-plus" type="button"> <i class="fa fa-plus"></i></button>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </td>
+                            <td class="harga_satuan text-right">${barang.harga_satuan}</td>
+                            <td class="total text-right">${barang.harga_satuan}</td>
+                            <td class="hapus text-center"><i class="fa fa-trash"></i></td>
+                        </tr>`
+                    );
+                    $("#select_barang").find(`option[value='${barang.id}']`).attr('disabled',true);
+                    $("#select_barang").find(`option[value='${barang.id}']`).css('color','#abafb3')
+
+                    var tr = tabel.find(`tr[id=${parseInt(i)+1}]`);
+                    console.log()
+
+                    tr.find('.qty-plus').click(function(){
+                        var oldValue = $(this).parent().parent().find('.input').val();
+                        $(this).parent().parent().find('input').val(parseInt(oldValue) + 10)
+                        var harga = tr.find('.harga_satuan').text();
+                        var jml = $(this).parent().parent().find('input').val();
+                        var total = parseInt(jml) * parseInt(harga);
+                        tr.find('.total').text(total);
+
+                        getSubtotal();
+                    })
+
+                    tr.find('.qty-min').click(function(){
+                        var oldValue = $(this).parent().parent().find('.input').val();
+                        if(oldValue > 10){
+                            $(this).parent().parent().find('input').val(parseInt(oldValue) - 10)
+                            var harga = tr.find('.harga_satuan').text();
+                            var jml = $(this).parent().parent().find('input').val();
+                            var total = parseInt(jml) * parseInt(harga);
+                            tr.find('.total').text(total);
+
+                            getSubtotal();
+                        }
+        
+                    })
+
+                    tr.find('.hapus').click(function(){
+                        tr.remove();
+                        getSubtotal();
+                        $("#select_barang").find(`option[value='${barang.id}']`).attr('disabled',false);
+                        $("#select_barang").find(`option[value='${barang.id}']`).css('color','#495057')
+                    });
+                }
+            });
 
             function getSubtotal(){
                 let sub = $('.total');
@@ -188,42 +233,11 @@ $(document).ready(function(){
                 $('#totalHarga').val(subtotal);
             }
 
-            $.each(tr, function(index, value){
-                let harga_satuan = tr.eq(index).find('.harga_satuan');
-                let harga_total = tr.eq(index).find('.total');
-                let input = tr.eq(index).find('input[type=text]');
-                let select = tr.eq(index).find('select');
-                let hapus = tr.eq(index).find('.fa-trash');
-
-                select.on('change',function(){
-                    harga_satuan.show();
-                    var harga = harga_satuan.text();
-                    
-                    let jml = input.val();
-                    let total = jml * harga;
-                    harga_total.text(total);
-
-                    getSubtotal();
-                });
-
-                input.on('keyup',function(){
-                    var harga = harga_satuan.text();
-                    let jml = input.val();
-                    let total = jml * harga;
-                    harga_total.text(total);
-
-                    getSubtotal();
-                });
-
-                hapus.click(function(){
-                    tr.eq(index).remove();
-                    getSubtotal();
-                });
-            });
-
-            getSubtotal();
         });
-    });
+
+            
+        });
+    
 
 });
     

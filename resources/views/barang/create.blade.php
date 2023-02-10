@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="harga_satuan">Harga Satuan<span class="text-danger">*</span>
+                                    <label class="col-lg-4 col-form-label" for="harga_satuan">Harga<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
                                         <input type="text" class="form-control @error('harga_satuan') is-invalid @enderror" id="harga_satuan" name="harga_satuan" value="{{ @old('harga_satuan') }}">

@@ -109,7 +109,7 @@
                                     </tr>
                                     <tr>
                                         <td>Tanggal Pemesanan</td>
-                                        <td>{{$penjualan->tanggal_pemesanan->format('d M Y')}}</td>
+                                        <td>: {{$penjualan->tanggal_pemesanan}}</td>
                                     </tr>
                                     <tr>
                                         <td>Total Pesanan</td>
@@ -170,7 +170,7 @@
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title">Detail Penjualan</h4>
+                                <h4 class="modal-title">Detail Pesanan</h4>
                                 <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
                                 </button>
                             </div>
@@ -190,7 +190,7 @@
                                     </tr>
                                     <tr>
                                         <td>Tanggal Pemesanan</td>
-                                        <td>: {{$penjualan->tanggal_pemesanan->format('d M Y')}}</td>
+                                        <td>: {{$penjualan->tanggal_pemesanan}}</td>
                                     </tr>
                                     @if(auth()->user()->isOwner == true)
                                         <tr>
@@ -215,7 +215,7 @@
                                         @endphp
                                         @foreach ($penjualan->detail_barang as $barang)
                                         <tr>
-                                            <td>{{ $barang->barang->nama }} {{ $barang->barang->ukuran }}</td>
+                                            <td>{{ $barang->barang->nama }}</td>
                                             <td>{{ $barang->jumlah }} Kg</td>
                                             <td class="text-right">{{ number_format($barang->barang->harga_satuan,0) }}</td>
                                             @php

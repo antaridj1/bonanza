@@ -22,7 +22,7 @@
                                     <div class="form-group">
                                         <input type="password" class="form-control" placeholder="Password" name="password">
                                     </div>
-                                    <button type="submit" class="btn login-form__btn submit w-100">Sign In</button>
+                                    <button type="submit" class="btn btn-primary submit w-100">Sign In</button>
                                 </form>
                                 
                             </div>
