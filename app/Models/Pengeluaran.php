@@ -11,6 +11,7 @@ class Pengeluaran extends Model
     protected $fillable = [
         'nama',
         'biaya',
+        'tanggal_pengeluaran'
     ];
 
     public function scopeCari($query, array $cari){

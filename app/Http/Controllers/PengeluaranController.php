@@ -28,6 +28,7 @@ class PengeluaranController extends Controller
             $request->validate([
                 'nama'=> 'required',
                 'biaya'=>'required|numeric|min:1',
+                'tanggal_pengeluaran' => 'required'
             ]);
 
             Pengeluaran::create($request->all());
@@ -46,7 +47,8 @@ class PengeluaranController extends Controller
         try{
             $request->validate([
                 'nama'=> 'required',
-                'biaya'=>'required|numeric|min:1'
+                'biaya'=>'required|numeric|min:1',
+                'tanggal_pengeluaran' => 'required'
             ]);
 
             $pengeluaran->update($request->all());
@@ -60,7 +62,7 @@ class PengeluaranController extends Controller
             ->with('message','Berhasil mengedit data');
     }
 
-    public function destroy(pengeluaran $pengeluaran)
+    public function destroy(Pengeluaran $pengeluaran)
     {
         try{
             $pengeluaran->delete();

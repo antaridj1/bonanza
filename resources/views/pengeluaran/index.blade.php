@@ -60,7 +60,7 @@
                                 @foreach ($pengeluarans as $pengeluaran)
                                 <tr> 
                                     <td>{{$loop->iteration}}</td>
-                                    <td>{{$pengeluaran->created_at->format('d M Y')}}</td>
+                                    <td>{{$pengeluaran->tanggal_pengeluaran}}</td>
                                     <td>{{$pengeluaran->nama}}</td>
                                     <td>{{number_format($pengeluaran->biaya,0)}}</td>
                                     <td>
@@ -166,6 +166,15 @@
                                             <label for="nama">Nama Pengeluaran</label>
                                             <input type="text" class="form-control @error('nama') is-invalid @enderror" value="{{ @old('nama') }}" id="nama" name="nama" >
                                             @error('nama')
+                                            <div class="invalid-feedback">
+                                                {{$message}}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="tanggal_pengeluaran">Tanggal Pengeluaran</label>
+                                            <input type="date" class="form-control @error('tanggal_pengeluaran') is-invalid @enderror" value="{{ @old('tanggal_pengeluaran') }}" id="tanggal_pengeluaran" name="tanggal_pengeluaran" >
+                                            @error('tanggal_pengeluaran')
                                             <div class="invalid-feedback">
                                                 {{$message}}
                                             </div>

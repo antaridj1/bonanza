@@ -61,8 +61,8 @@ class DashboardController extends Controller
 
     public function getProfit(){
         $year = Carbon::now()->year;
-        $pengeluarans = Pengeluaran::selectRaw('year(created_at) year, monthname(created_at) month, sum(biaya) as sum')
-                    ->whereYear('created_at',$year)
+        $pengeluarans = Pengeluaran::selectRaw('year(tanggal_pengeluaran) year, monthname(tanggal_pengeluaran) month, sum(biaya) as sum')
+                    ->whereYear('tanggal_pengeluaran',$year)
                     ->groupBy('year','month')
                     ->orderBy('month','DESC')
                     ->get()->toArray();
