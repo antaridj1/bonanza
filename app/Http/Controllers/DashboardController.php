@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Barang;
-use App\Models\DetailBarang;
+use App\Models\Produk;
+use App\Models\DetailProduk;
 use App\Models\Pengeluaran;
 use App\Models\Penjualan;
 use Carbon\Carbon;
@@ -19,44 +19,44 @@ class DashboardController extends Controller
         $penjualan = Penjualan::selectRaw('sum(total_harga) as sum')->whereYear('created_at',$year)->value('sum');
         $pengeluaran = Pengeluaran::selectRaw('sum(biaya) as sum')->whereYear('created_at',$year)->value('sum');
         $profit = $penjualan - $pengeluaran;
-        $stok_kosong = count(Barang::where('stok','0')->get());
-        $barang = DetailBarang::selectRaw('sum(jumlah) as sum')->whereYear('created_at',$year)->value('sum');
-        return view('dashboard-owner',compact(['penjualan','profit','stok_kosong','barang','year','month']));
+        $stok_kosong = count(Produk::where('stok','0')->get());
+        $produk = DetailProduk::selectRaw('sum(jumlah) as sum')->whereYear('created_at',$year)->value('sum');
+        return view('dashboard-owner',compact(['penjualan','profit','stok_kosong','produk','year','month']));
     }
 
     public function indexKaryawan(){
         $year = Carbon::now()->year; 
         $id = Auth::id();
-        $stok_kosong = count(Barang::where('stok','0')->get());
+        $stok_kosong = count(Produk::where('stok','0')->get());
         $penjualans = Penjualan::where('karyawans_id',$id)->get();
         $penjualan = Penjualan::where('karyawans_id',$id)->orderBy('created_at','DESC')->first();
         $penjualan_per_tahun = count(Penjualan::where('karyawans_id',$id)->whereYear('created_at',$year)->pluck('id'));
         return view('dashboard-karyawan',compact(['penjualans','penjualan','penjualan_per_tahun','stok_kosong']));
     }
 
-    public function getBarangs(Request $request){
+    public function getProduks(Request $request){
         $year = Carbon::now()->year;
 
-        $data_barangs = Barang::pluck('nama','id');
-        $barangs = Barang::pluck('nama');
-        $data_jumlah = DetailBarang::selectRaw('year(created_at) year, barangs_id, sum(jumlah) as sum')
+        $data_produks = Produk::pluck('nama','id');
+        $produks = Produk::pluck('nama');
+        $data_jumlah = DetailProduk::selectRaw('year(created_at) year, produks_id, sum(jumlah) as sum')
             ->whereYear('created_at',$year)
-            ->groupBy('year','barangs_id')
-            ->orderBy('barangs_id')
+            ->groupBy('year','produks_id')
+            ->orderBy('produks_id')
             ->get()->toArray();
 
             $jumlah = [];
 
-            foreach ($data_barangs as $id => $barang) {
-                $id = array_search($id, array_column($data_jumlah, 'barangs_id'));
+            foreach ($data_produks as $id => $produk) {
+                $id = array_search($id, array_column($data_jumlah, 'produks_id'));
                 $data = $id === false ? 0 : $data_jumlah[$id]['sum'];
                 array_push($jumlah, $data);
             }
 
            
             // dd($jumlah);
-        //$jumlah = DetailBarang::orderBy('barangs_id')->groupBy('barangs_id')->selectRaw('sum(jumlah) as sum')->pluck('sum');
-        return response()->json(array($barangs,$jumlah));
+        //$jumlah = Detailproduk::orderBy('produks_id')->groupBy('produks_id')->selectRaw('sum(jumlah) as sum')->pluck('sum');
+        return response()->json(array($produks,$jumlah));
     }
 
     public function getProfit(){

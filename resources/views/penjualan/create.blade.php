@@ -74,27 +74,27 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="search">Ikan<span class="text-danger">*</span>
+                                    <label class="col-lg-4 col-form-label" for="search">Produk<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
                                         <div class="form-group mt-2">
                                             <div class="d-flex">
-                                                <select class="form-control @error('barang') is-invalid @enderror" 
+                                                <select class="form-control @error('produk') is-invalid @enderror" 
                                                     aria-label=".form-select-sm example"
-                                                    id="select_barang">
-                                                        <option value="">-- Tambahkan Ikan --</option>
-                                                    @foreach ($barangs as $barang)
-                                                        <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
+                                                    id="select_produk">
+                                                        <option value="">-- Tambahkan Produk --</option>
+                                                    @foreach ($produks as $produk)
+                                                        <option value="{{ $produk->id }}">{{ $produk->nama }}</option>
                                                     @endforeach
                                                 </select>
                                                 <span class="input-group-append">
-                                                    <button class="btn btn-outline-secondary" id="button_barang" type="button" >
+                                                    <button class="btn btn-outline-secondary" id="button_produk" type="button" >
                                                         <i class="fa fa-plus"></i>
                                                     </button>
                                                 </span>
                                             </div>
                                         </div> 
-                                        @error('barang')
+                                        @error('produk')
                                             <div class="invalid-feedback">
                                                 {{$message}}
                                             </div>
@@ -105,14 +105,14 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Nama Ikan</th>
+                                            <th>Nama Produk</th>
                                             <th class="text-center">Jumlah (kg)</th>
                                             <th class="text-right">Harga (Rp)</th>
                                             <th class="text-right">Total (Rp)</th>
                                             <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tbody id="tabel_barang">
+                                    <tbody id="tabel_produk">
 
                                     </tbody>
                                     <tfoot>
@@ -148,23 +148,23 @@
     @include('layout.alert')
 @endif
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-{{-- <script src="{{asset('assets/js/barang.js')}}"></script> --}}
+{{-- <script src="{{asset('assets/js/produk.js')}}"></script> --}}
 
 <script>
 $(document).ready(function(){
     
-    $("#button_barang").click(function(){
-        $.get("{{ route('penjualan.getBarang') }}",function(barangs){
-            let reqBarang = $("#select_barang").val();
-            const tabel = $("#tabel_barang");
-            $.each(barangs, function(i,barang){
-                let reqNama = $("#select_barang").find('option:selected').text();
-                if( barang.id == reqBarang){
+    $("#button_produk").click(function(){
+        $.get("{{ route('penjualan.getProduk') }}",function(produks){
+            let reqproduk = $("#select_produk").val();
+            const tabel = $("#tabel_produk");
+            $.each(produks, function(i,produk){
+                let reqNama = $("#select_produk").find('option:selected').text();
+                if( produk.id == reqproduk){
                     
 
                     tabel.append(
                         `<tr id="${parseInt(i)+1}">
-                            <td>${reqNama}<input type="hidden" name="barang[]" value="${barang.id}"></td>
+                            <td>${reqNama}<input type="hidden" name="produk[]" value="${produk.id}"></td>
                             <td><div class="d-flex">
                                 <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -178,13 +178,13 @@ $(document).ready(function(){
                                     
                                 </div>
                             </td>
-                            <td class="harga_satuan text-right">${barang.harga_satuan}</td>
-                            <td class="total text-right">${barang.harga_satuan}</td>
+                            <td class="harga_satuan text-right">${produk.harga_satuan}</td>
+                            <td class="total text-right">${produk.harga_satuan}</td>
                             <td class="hapus text-center"><i class="fa fa-trash"></i></td>
                         </tr>`
                     );
-                    $("#select_barang").find(`option[value='${barang.id}']`).attr('disabled',true);
-                    $("#select_barang").find(`option[value='${barang.id}']`).css('color','#abafb3')
+                    $("#select_produk").find(`option[value='${produk.id}']`).attr('disabled',true);
+                    $("#select_produk").find(`option[value='${produk.id}']`).css('color','#abafb3')
 
                     var tr = tabel.find(`tr[id=${parseInt(i)+1}]`);
                     console.log()
@@ -217,8 +217,8 @@ $(document).ready(function(){
                     tr.find('.hapus').click(function(){
                         tr.remove();
                         getSubtotal();
-                        $("#select_barang").find(`option[value='${barang.id}']`).attr('disabled',false);
-                        $("#select_barang").find(`option[value='${barang.id}']`).css('color','#495057')
+                        $("#select_produk").find(`option[value='${produk.id}']`).attr('disabled',false);
+                        $("#select_produk").find(`option[value='${produk.id}']`).css('color','#495057')
                     });
                 }
             });

@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','Barang | UD. Arisya')
+@section('title','produk | UD. Arisya')
 
 @section('container')
 
@@ -13,7 +13,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Barang</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Produk</a></li>
             </ol>
         </div>
     </div>
@@ -22,9 +22,9 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Data Barang</h4>
+                        <h4 class="card-title">Data produk</h4>
                         <div class="d-flex justify-content-end">
-                            <form action="{{route('barang.index')}}">
+                            <form action="{{route('produk.index')}}">
                                 <div class="input-group">
                                     <input class="form-control border-end-0 border" type="search" placeholder="Search" id="example-search-input" aria-describedby="button-addon2" name="search" value="{{request('search')}}">
                                     <span class="input-group-append">
@@ -35,10 +35,10 @@
                                 </div>
                             </form>
                             <div class="dropdown">
-                                <a href="{{ route('barang.cetak') }}" class="btn btn-secondary shadow-sm mx-2">Cetak PDF</a>
+                                <a href="{{ route('produk.cetak') }}" class="btn btn-secondary shadow-sm mx-2">Cetak PDF</a>
                             </div>
                             @if(auth()->user()->isOwner == false)
-                            <a href="{{route('barang.create')}}" class="btn btn-primary mb-3">
+                            <a href="{{route('produk.create')}}" class="btn btn-primary mb-3">
                                 Tambahkan Data
                             </a>
                             @endif
@@ -57,19 +57,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach ($barangs as $barang)
+                            @foreach ($produks as $produk)
                             <tr> 
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$barang->nama}}</td>
-                                <td>{{number_format($barang->harga_satuan,0)}}</td>
-                                <td>{{$barang->stok}}</td>
+                                <td>{{$produk->nama}}</td>
+                                <td>{{number_format($produk->harga_satuan,0)}}</td>
+                                <td>{{$produk->stok}}</td>
                                 
-                                <td><a href="{{route('barang.index', $barang->id)}}" class="label label-primary" 
-                                    data-toggle="modal" data-target="#detail_{{$barang->id}}"  data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
+                                <td><a href="{{route('produk.index', $produk->id)}}" class="label label-primary" 
+                                    data-toggle="modal" data-target="#detail_{{$produk->id}}"  data-bs-toggle="tooltip" data-bs-placement="top" title="Detail">
                                     <i class="fa fa-search"></i>
                                     </a>
                                     <!-- The Modal -->
-                                    <div class="modal fade" id="detail_{{$barang->id}}">
+                                    <div class="modal fade" id="detail_{{$produk->id}}">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                             <!-- Modal Header -->
@@ -79,23 +79,23 @@
                                                 </div>
                                                 <!-- Modal body -->
                                                 <div class="modal-body">
-                                                    <p>{{$barang->keterangan}}</p>
+                                                    <p>{{$produk->keterangan}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
                                 <td>
-                                    <a href="{{route('barang.edit', $barang->id)}}" class="label label-secondary m-1" 
+                                    <a href="{{route('produk.edit', $produk->id)}}" class="label label-secondary m-1" 
                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
                                     <i class="fa fa-edit"></i>
                                     </a>
 
-                                    <a href="{{route('barang.delete', $barang->id)}}" class="label label-danger m-1" 
-                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"  data-toggle="modal" data-target="#delete_{{$barang->id}}">
+                                    <a href="{{route('produk.delete', $produk->id)}}" class="label label-danger m-1" 
+                                     data-bs-toggle="tooltip" data-bs-placement="top" title="Delete"  data-toggle="modal" data-target="#delete_{{$produk->id}}">
                                     <i class="fa fa-trash"></i>
                                     </a>
-                                    <div class="modal fade" id="delete_{{$barang->id}}">
+                                    <div class="modal fade" id="delete_{{$produk->id}}">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                             <!-- Modal Header -->
@@ -105,7 +105,7 @@
                                                 </div>
                                                 <!-- Modal body -->
                                                 <div class="modal-body">
-                                                    <form method="post" action="{{route('barang.delete',$barang->id)}}">
+                                                    <form method="post" action="{{route('produk.delete',$produk->id)}}">
                                                     @method('delete')
                                                     @csrf
                                                     <div class="form-group"> 
@@ -128,7 +128,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        {{$barangs->links()}}
+                        {{$produks->links()}}
                     </div>
                 </div>
             </div>

@@ -17,7 +17,7 @@
 
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title text-center mb-5">Data Barang</h4>
+                        <h4 class="card-title text-center mb-5">Data Produk</h4>
                         <div class="table-responsive">
                         <table class="table table-striped table-bordered text-center">
                             <thead>
@@ -29,12 +29,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @foreach ($barangs as $barang)
+                            @foreach ($produks as $produk)
                             <tr> 
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$barang->nama}}</td>
-                                <td>{{$barang->harga_satuan}}</td>
-                                <td>{{$barang->stok}}</td>
+                                <td>{{$produk->nama}}</td>
+                                <td>{{$produk->harga_satuan}}</td>
+                                <td>{{$produk->stok}}</td>
                             </tr>
                             @endforeach
                             </tbody>

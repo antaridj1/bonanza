@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Barang extends Model
+class produk extends Model
 {
     use HasFactory;
 
@@ -17,9 +17,9 @@ class Barang extends Model
     ];
     // protected $guarded = 'id';
 
-    public function detail_barang()
+    public function detail_produk()
     {
-        return $this->hasMany(DetailBarang::class, 'barangs_id');
+        return $this->hasMany(DetailProduk::class, 'produks_id');
     }
 
     public function scopeCari($query, array $cari){

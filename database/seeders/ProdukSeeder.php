@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Barang;
+use App\Models\Produk;
 
-class BarangSeeder extends Seeder
+class ProdukSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class BarangSeeder extends Seeder
      */
     public function run()
     {
-        $barangs = 
+        $produks = 
         [
            [
             'nama' => 'Baby Tuna',
@@ -42,8 +42,8 @@ class BarangSeeder extends Seeder
            ]
         ];
 
-        foreach($barangs as $barang){
-            Barang::create($barang);
+        foreach($produks as $produk){
+            Produk::create($produk);
         }
     }
 }

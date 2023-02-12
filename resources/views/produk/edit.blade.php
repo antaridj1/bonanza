@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','Barang | UD. Arisya')
+@section('title','produk | UD. Arisya')
 
 @section('container')
 
@@ -12,8 +12,8 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Barang</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Tambah Data</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Produk</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Edit Data</a></li>
             </ol>
         </div>
     </div>
@@ -23,13 +23,15 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <form class="form-valide" action="{{route('barang.store')}}" method="post">
+                            
+                            <form class="form-valide" action="{{route('produk.update',$produk->id)}}" method="post">
+                                @method('patch')
                                 @csrf
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="nama">Nama Barang <span class="text-danger">*</span>
+                                    <label class="col-lg-4 col-form-label" for="nama">Nama Produk <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ @old('nama') }}">
+                                        <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{$produk->nama}}">
                                         @error('nama')
                                             <div class="invalid-feedback">
                                                 {{$message}}
@@ -38,10 +40,10 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="harga_satuan">Harga<span class="text-danger">*</span>
+                                    <label class="col-lg-4 col-form-label" for="harga_satuan">Harga Satuan<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control @error('harga_satuan') is-invalid @enderror" id="harga_satuan" name="harga_satuan" value="{{ @old('harga_satuan') }}">
+                                        <input type="text" class="form-control @error('harga_satuan') is-invalid @enderror" id="harga_satuan" name="harga_satuan" value="{{$produk->harga_satuan}}">
                                         @error('harga_satuan')
                                             <div class="invalid-feedback">
                                                 {{$message}}
@@ -53,7 +55,7 @@
                                     <label class="col-lg-4 col-form-label" for="stok">Jumlah Stok<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <input type="text" class="form-control @error('stok') is-invalid @enderror" id="stok" name="stok" value="{{ @old('stok') }}">
+                                        <input type="text" class="form-control @error('stok') is-invalid @enderror" id="stok" name="stok" value="{{$produk->stok}}" >
                                         @error('stok')
                                             <div class="invalid-feedback">
                                                 {{$message}}
@@ -65,7 +67,7 @@
                                     <label class="col-lg-4 col-form-label" for="keterangan">Keterangan <span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
-                                        <textarea class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan" rows="5" value="{{ @old('keterangan') }}"></textarea>
+                                        <textarea class="form-control @error('keterangan') is-invalid @enderror" id="keterangan" name="keterangan" rows="5">{{$produk->keterangan}}</textarea>
                                         @error('keterangan')
                                             <div class="invalid-feedback">
                                                 {{$message}}
@@ -79,6 +81,7 @@
                                     </div>
                                 </div>
                             </form>
+                            
                         </div>
                     </div>
                 </div>

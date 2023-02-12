@@ -1,12 +1,12 @@
 // $(document).ready(function(){
-//     $("#button_barang").click(function(){
-//         let barang = $("#select_barang").val();
-//         let tabel = $("#tabel_barang");
+//     $("#button_produk").click(function(){
+//         let produk = $("#select_produk").val();
+//         let tabel = $("#tabel_produk");
 //         tabel.append(
 //         '<tr>\
-//             <td>'+barang+'</td>\
+//             <td>'+produk+'</td>\
 //             <td><input type="text" class="form-control" min="1" value="1" id="jumlah" name="jumlah"></td>\
-//             <td>{{$barang->harga}}</td>\
+//             <td>{{$produk->harga}}</td>\
 //         </tr>'
 //         );
 //     });

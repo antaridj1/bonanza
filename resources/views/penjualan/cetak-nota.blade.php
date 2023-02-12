@@ -35,7 +35,7 @@
             <table class="table col-7">
                 <thead>
                     <tr>
-                        <th>Nama Barang</th>
+                        <th>Nama Produk</th>
                         <th>Jumlah</th>
                         <th class="text-right">Harga (Rp)</th>
                         <th class="text-right">Total (Rp)</th>
@@ -46,13 +46,13 @@
                         $tot = 0;
                         $jml = 0;
                     @endphp
-                    @foreach ($penjualan->detail_barang as $barang)
+                    @foreach ($penjualan->detail_produk as $produk)
                     <tr>
-                        <td>{{ $barang->barang->nama }}</td>
-                        <td>{{ $barang->jumlah }} Kg</td>
-                        <td class="text-right">{{ number_format($barang->barang->harga_satuan,0) }}</td>
+                        <td>{{ $produk->produk->nama }}</td>
+                        <td>{{ $produk->jumlah }} Kg</td>
+                        <td class="text-right">{{ number_format($produk->produk->harga_satuan,0) }}</td>
                         @php
-                            $tot = $barang->barang->harga_satuan * $barang->jumlah;
+                            $tot = $produk->produk->harga_satuan * $produk->jumlah;
                         @endphp
                         <td class="text-right">{{ number_format($tot,0) }}</td>
                     </tr>

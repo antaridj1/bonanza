@@ -54,7 +54,7 @@
                         <table class="table col-12">
                             <thead>
                                 <tr>
-                                    <th>Nama Barang</th>
+                                    <th>Nama Produk</th>
                                     <th>Jumlah</th>
                                     <th class="text-right">Harga (Rp)</th>
                                     <th class="text-right">Total (Rp)</th>
@@ -65,23 +65,23 @@
                                     $tot = 0;
                                     $jml = 0;
                                 @endphp
-                                @foreach ($penjualan->detail_barang as $barang)
+                                @foreach ($penjualan->detail_produk as $produk)
                                 <tr>
-                                    <td>{{ $barang->barang->nama }} {{ $barang->barang->ukuran }}</td>
+                                    <td>{{ $produk->produk->nama }} {{ $produk->produk->ukuran }}</td>
                                     
-                                    @if ($barang->satuan == "Buah")
-                                        <td>{{ $barang->jumlah }} {{ $barang->satuan }}</td>
-                                        <td class="text-right">{{ number_format($barang->barang->harga_satuan,0) }}</td>
+                                    @if ($produk->satuan == "Buah")
+                                        <td>{{ $produk->jumlah }} {{ $produk->satuan }}</td>
+                                        <td class="text-right">{{ number_format($produk->produk->harga_satuan,0) }}</td>
                                         @php
-                                            $tot = $barang->barang->harga_satuan * $barang->jumlah;
+                                            $tot = $produk->produk->harga_satuan * $produk->jumlah;
                                         @endphp
                                     @else
                                         @php
-                                            $jml = $barang->jumlah/$barang->barang->jumlah_paket;
-                                            $tot = $barang->barang->harga_paket * $jml;
+                                            $jml = $produk->jumlah/$produk->produk->jumlah_paket;
+                                            $tot = $produk->produk->harga_paket * $jml;
                                         @endphp
-                                        <td>{{ $jml }} {{ $barang->satuan }}</td>
-                                        <td class="text-right">{{ number_format($barang->barang->harga_paket,0) }}</td>
+                                        <td>{{ $jml }} {{ $produk->satuan }}</td>
+                                        <td class="text-right">{{ number_format($produk->produk->harga_paket,0) }}</td>
                                         
                                     @endif
                                     <td class="text-right">{{ number_format($tot,0) }}</td>

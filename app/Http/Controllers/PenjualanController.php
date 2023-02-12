@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penjualan;
-use App\Models\Barang;
-use App\Models\DetailBarang;
+use App\Models\Produk;
+use App\Models\DetailProduk;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,21 +32,21 @@ class PenjualanController extends Controller
 
     public function create()
     {   
-        $barangs = Barang::all();
-        return view('penjualan.create',compact('barangs'));
+        $produks = Produk::all();
+        return view('penjualan.create',compact('produks'));
     }
 
-    public function getBarang()
+    public function getProduk()
     {
-        $barangs = Barang::all();
-        return response()->json($barangs);
+        $produks = Produk::all();
+        return response()->json($produks);
     }
 
     public function store(Request $request)
     {
-        $reqBarang = collect($request->barang);
+        $reqproduk = collect($request->produk);
         $reqJumlah = collect($request->jumlah);
-        $index = count($reqBarang);
+        $index = count($reqproduk);
 
         $user_id = Auth::id();
 
@@ -68,16 +68,16 @@ class PenjualanController extends Controller
 
         for($i=0;$i<$index;$i++){
 
-            DetailBarang::create([
-                'barangs_id' => $reqBarang[$i],
+            DetailProduk::create([
+                'produks_id' => $reqproduk[$i],
                 'penjualans_id' => $penjualan->id,
                 'jumlah' => $reqJumlah[$i],
             ]);
 
-            $stok = Barang::where('id',$reqBarang[$i])->value('stok');
+            $stok = Produk::where('id',$reqproduk[$i])->value('stok');
             $sisa = $stok - $reqJumlah[$i];
             
-            Barang::where('id',$reqBarang[$i])->update([
+            Produk::where('id',$reqproduk[$i])->update([
                 'stok' => $sisa
             ]);
         }

@@ -25,9 +25,9 @@ class Penjualan extends Model
         return $this->belongsTo(User::class, 'karyawans_id');
     }
 
-    public function detail_barang()
+    public function detail_produk()
     {
-        return $this->hasMany(DetailBarang::class, 'penjualans_id');
+        return $this->hasMany(DetailProduk::class, 'penjualans_id');
     }
 
     public function scopeFilter($query, array $filter){

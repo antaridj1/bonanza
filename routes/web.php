@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\BarangController;
+use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PenjualanController;
 use App\Http\Controllers\PengeluaranController;
@@ -29,19 +29,19 @@ Route::post('/login', [AuthController::class, 'postLogin'])->name('postLogin');
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard-owner', [DashboardController::class, 'indexOwner']);
     Route::get('/dashboard-karyawan', [DashboardController::class, 'indexKaryawan']);
-    Route::get('/dashboard-barang', [DashboardController::class, 'getBarangs'])->name('getBarangs');
+    Route::get('/dashboard-produk', [DashboardController::class, 'getProduks'])->name('getProduks');
     Route::get('/dashboard-profit', [DashboardController::class, 'getProfit'])->name('getProfit');
 
-    Route::group(['prefix' => 'barang', 'as' => 'barang.'], function () {
-        Route::get('/', [BarangController::class, 'index'])->name('index');
-        Route::get('create', [BarangController::class, 'create'])->name('create');
-        Route::post('create', [BarangController::class, 'store'])->name('store');
-        Route::get('edit/{barang}', [BarangController::class, 'edit'])->name('edit');
-        Route::patch('edit/{barang}', [BarangController::class, 'update'])->name('update');
-        Route::delete('delete/{barang}', [BarangController::class, 'destroy'])->name('delete');
-        Route::get('stok', [BarangController::class, 'getStok'])->name('getStok');
-        Route::patch('stok', [BarangController::class, 'postStok'])->name('postStok');
-        Route::get('cetak', [BarangController::class, 'cetak'])->name('cetak');
+    Route::group(['prefix' => 'produk', 'as' => 'produk.'], function () {
+        Route::get('/', [ProdukController::class, 'index'])->name('index');
+        Route::get('create', [ProdukController::class, 'create'])->name('create');
+        Route::post('create', [ProdukController::class, 'store'])->name('store');
+        Route::get('edit/{produk}', [ProdukController::class, 'edit'])->name('edit');
+        Route::patch('edit/{produk}', [ProdukController::class, 'update'])->name('update');
+        Route::delete('delete/{produk}', [ProdukController::class, 'destroy'])->name('delete');
+        Route::get('stok', [ProdukController::class, 'getStok'])->name('getStok');
+        Route::patch('stok', [ProdukController::class, 'postStok'])->name('postStok');
+        Route::get('cetak', [ProdukController::class, 'cetak'])->name('cetak');
     });
 
     Route::group(['prefix' => 'karyawan', 'as' => 'karyawan.'], function () {
@@ -60,7 +60,7 @@ Route::middleware(['auth'])->group(function () {
     Route::group(['prefix' => 'penjualan', 'as' => 'penjualan.'], function () {
         Route::get('/', [PenjualanController::class, 'index'])->name('index');
         Route::get('create', [PenjualanController::class, 'create'])->name('create');
-        Route::get('getBarang', [PenjualanController::class, 'getBarang'])->name('getBarang');
+        Route::get('getProduk', [PenjualanController::class, 'getProduk'])->name('getProduk');
         Route::post('create', [PenjualanController::class, 'store'])->name('store');
         Route::patch('/{penjualan}', [PenjualanController::class, 'update'])->name('editStatus');
         Route::delete('delete/{penjualan}', [PenjualanController::class, 'destroy'])->name('delete');

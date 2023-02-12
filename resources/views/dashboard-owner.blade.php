@@ -48,10 +48,10 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card gradient-3">
                     <div class="card-body">
-                        <h3 class="card-title text-white">Ikan Terjual </h3>
+                        <h3 class="card-title text-white">Produk Terjual </h3>
                         <div class="d-inline-block">
-                            @if ($barang !== null)
-                            <h2 class="text-white">{{ $barang }}</h2>
+                            @if ($produk !== null)
+                            <h2 class="text-white">{{ $produk }}</h2>
                             @else
                             <h2 class="text-white">0</h2>
                             @endif
@@ -67,13 +67,13 @@
         <div class="row">
             <div class="card col-lg-12 col-md-12 col-sm-12">
                 <div class="card-body">
-                        <h4 class="card-title">Grafik Barang Terjual Tahun {{ $year }}</h4>
+                        <h4 class="card-title">Grafik produk Terjual Tahun {{ $year }}</h4>
                     <div id="distributed-series" class="ct-chart ct-golden-section"></div>
                 </div>
             </div>
             {{-- <div class="card col-lg-12 col-md-12 col-sm-12">
                 <div class="card-body">
-                    <h4 class="card-title">Grafik Barang Terjual Tahun {{ $year }}</h4>
+                    <h4 class="card-title">Grafik produk Terjual Tahun {{ $year }}</h4>
                     <canvas id="singelBarChart" width="500" height="250"></canvas>
                 </div>
             </div> --}}
@@ -93,9 +93,9 @@
 <script>
     
    //Distributed series
-$.get("{{ route('getBarangs') }}",function([barangs,jumlah]){
+$.get("{{ route('getProduks') }}",function([produks,jumlah]){
     new Chartist.Bar('#distributed-series', {
-        labels: barangs,
+        labels: produks,
         series: jumlah
     }, {
         distributeSeries: true,
@@ -130,16 +130,16 @@ $.get("{{ route('getProfit') }}",function(profits){
 });
 
 // single bar chart
-// $.get("{{ route('getBarangs') }}",function([barangs,jumlah]){
+// $.get("{{ route('getProduks') }}",function([produks,jumlah]){
 // var ctx = document.getElementById("singelBarChart");
 //     ctx.height = 150;
 //     var myChart = new Chart(ctx, {
 //         type: 'bar',
 //         data: {
-//             labels: barangs,
+//             labels: produks,
 //             datasets: [
 //                 {
-//                     label: "Barang",
+//                     label: "produk",
 //                     data: jumlah,
 //                     borderColor: "rgba(117, 113, 249, 0.9)",
 //                     borderWidth: "0",

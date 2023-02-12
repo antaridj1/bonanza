@@ -13,8 +13,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('barang.index') }}" aria-expanded="false">
-                                <i class="icon-wallet"></i><span class="nav-text">Data Ikan</span>
+                            <a href="{{ route('produk.index') }}" aria-expanded="false">
+                                <i class="icon-wallet"></i><span class="nav-text">Data Produk</span>
                             </a>
                         </li>
                         <li>
@@ -40,11 +40,11 @@
                         </li>
                         <li>
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="icon-basket-loaded"></i> <span class="nav-text">Ikan</span>
+                                <i class="icon-basket-loaded"></i> <span class="nav-text">Produk</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="{{route('barang.index')}}">Data Ikan</a></li>
-                                <li><a href="{{route('barang.getStok')}}">Tambah Stok</a></li>
+                                <li><a href="{{route('produk.index')}}">Data Produk</a></li>
+                                <li><a href="{{route('produk.getStok')}}">Tambah Stok</a></li>
                             </ul>
                         </li>
                     @endif

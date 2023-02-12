@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','Barang | UD. Arisya')
+@section('title','produk | UD. Arisya')
 
 @section('container')
 
@@ -12,7 +12,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Barang</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Produk</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Tambah Data</a></li>
             </ol>
         </div>
@@ -23,24 +23,24 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <form class="form-valide" action="{{route('barang.postStok')}}" method="post">
+                            <form class="form-valide" action="{{route('produk.postStok')}}" method="post">
                                 @method('patch')
                                 @csrf
                                 <div class="form-group row">
-                                    <label class="col-lg-4 col-form-label" for="search">Barang<span class="text-danger">*</span>
+                                    <label class="col-lg-4 col-form-label" for="search">Produk<span class="text-danger">*</span>
                                     </label>
                                     <div class="col-lg-6">
                                         <div class="form-group mt-2">
-                                            <select class="form-control @error('barang') is-invalid @enderror" 
+                                            <select class="form-control @error('produk') is-invalid @enderror" 
                                                 aria-label=".form-select-sm example"
-                                                id="select_barang" name="nama">
-                                                    <option value="">-- Tambahkan Barang --</option>
-                                                @foreach ($barangs as $barang)
-                                                    <option value="{{ $barang->id }}">{{ $barang->nama }}</option>
+                                                id="select_produk" name="nama">
+                                                    <option value="">-- Tambahkan Produk --</option>
+                                                @foreach ($produks as $produk)
+                                                    <option value="{{ $produk->id }}">{{ $produk->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div> 
-                                        @error('barang')
+                                        @error('produk')
                                             <div class="invalid-feedback">
                                                 {{$message}}
                                             </div>

@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Barang;
+use App\Models\Produk;
 use Illuminate\Http\Request;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
-class BarangController extends Controller
+class ProdukController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,10 +17,10 @@ class BarangController extends Controller
      */
     public function index()
     {
-        // dd(Barang::groupBy('ukuran')->selectRaw('sum(harga_satuan) as sum, ukuran')->pluck('sum','ukuran'));
-       // dd(Barang::selectRaw('MONTH(created_at) as month')->get());
-        $barangs = Barang::cari(request(['search']))->paginate(10)->withQueryString();
-        return view('barang.index',compact('barangs'));
+        // dd(produk::groupBy('ukuran')->selectRaw('sum(harga_satuan) as sum, ukuran')->pluck('sum','ukuran'));
+       // dd(produk::selectRaw('MONTH(created_at) as month')->get());
+        $produks = Produk::cari(request(['search']))->paginate(10)->withQueryString();
+        return view('produk.index',compact('produks'));
     }
 
     /**
@@ -30,7 +30,7 @@ class BarangController extends Controller
      */
     public function create()
     {
-        return view('barang.create');
+        return view('produk.create');
     }
 
     public function store(Request $request)
@@ -44,7 +44,7 @@ class BarangController extends Controller
 
             // $slug = Str::of($request->nama)->append(' ')->append( $request->ukuran);
 
-            Barang::create([
+            Produk::create([
                 'nama'=> $request->nama,
                 'harga_satuan'=>$request->harga_satuan,
                 'stok'=>$request->stok,
@@ -52,24 +52,24 @@ class BarangController extends Controller
                 // 'slug'=>$slug,
             ]);
 
-        return redirect('barang')
+        return redirect('produk')
             ->with('status','success')
             ->with('message','Berhasil menambahkan data');
     }
 
-    public function edit(Barang $barang)
+    public function edit(Produk $produk)
     {
-        return view('barang.edit',compact('barang'));
+        return view('produk.edit',compact('produk'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Barang  $barang
+     * @param  \App\Models\produk  $produk
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Barang $barang)
+    public function update(Request $request, Produk $produk)
     { 
         $edit = $request->validate([
                 'nama'=> 'required',
@@ -78,33 +78,33 @@ class BarangController extends Controller
                 'keterangan'=>'required'
                 ]);
         
-        $barang->update([
+        $produk->update([
             'nama'=> $request->nama,
             'harga_satuan'=>$request->harga_satuan,
             'stok'=>$request->stok,
             'keterangan'=>$request->keterangan,
         ]);
-        return redirect('barang')
+        return redirect('produk')
             ->with('status','success')
             ->with('message','Berhasil mengedit data');
     }
 
-    public function destroy(Barang $barang)
+    public function destroy(Produk $produk)
     {
         try{
-            $barang->delete();
+            $produk->delete();
         }catch(Exception $e){
             Log::info($e->getMessage());
-            return back()->withInput()->with('error', 'Gagal menghapus barang');
+            return back()->withInput()->with('error', 'Gagal menghapus produk');
         }
-        return redirect('barang')
+        return redirect('produk')
             ->with('status','success')
             ->with('message','Berhasil menghapus data');
     }
 
     public function getStok(){
-        $barangs = Barang::all();
-        return view('barang.stok',compact('barangs'));
+        $produks = Produk::all();
+        return view('produk.stok',compact('produks'));
     }
 
     public function postStok(Request $request){
@@ -113,20 +113,20 @@ class BarangController extends Controller
             'stok' => 'required'
         ]);
 
-        $stok_lama = Barang::where('id',$request->nama)->value('stok');
+        $stok_lama = Produk::where('id',$request->nama)->value('stok');
         $stok_baru = $stok_lama + $request->stok;
 
-        Barang::where('id',$request->nama)->update([
+        Produk::where('id',$request->nama)->update([
             'stok' => $stok_baru
         ]);
 
-        return redirect('barang')
+        return redirect('produk')
             ->with('status','success')
             ->with('message','Berhasil menambahkan stok');
     }
 
     public function cetak(){
-        $barangs = Barang::all();
-        return view('barang.cetak',compact('barangs'));
+        $produks = Produk::all();
+        return view('produk.cetak',compact('produks'));
     }
 }
