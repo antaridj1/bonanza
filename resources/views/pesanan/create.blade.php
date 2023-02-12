@@ -84,7 +84,7 @@
                                                     id="select_produk">
                                                         <option value="">-- Tambahkan Produk --</option>
                                                     @foreach ($produks as $produk)
-                                                        <option value="{{ $produk->id }}">{{ $produk->nama }}</option>
+                                                        <option value="{{ $produk->id }}" {{($produk->stok < 10)? 'disabled="true" style=color:#ee0000 !important;' : ''}}>{{ $produk->nama }} ({{$produk->stok}})</option>
                                                     @endforeach
                                                 </select>
                                                 <span class="input-group-append">
@@ -160,11 +160,10 @@ $(document).ready(function(){
             $.each(produks, function(i,produk){
                 let reqNama = $("#select_produk").find('option:selected').text();
                 if( produk.id == reqproduk){
-                    
 
                     tabel.append(
                         `<tr id="${parseInt(i)+1}">
-                            <td>${reqNama}<input type="hidden" name="produk[]" value="${produk.id}"></td>
+                            <td>${produk.nama}<input type="hidden" name="produk[]" value="${produk.id}"></td>
                             <td><div class="d-flex">
                                 <div class="input-group mb-3">
                                         <div class="input-group-prepend">
@@ -185,19 +184,21 @@ $(document).ready(function(){
                     );
                     $("#select_produk").find(`option[value='${produk.id}']`).attr('disabled',true);
                     $("#select_produk").find(`option[value='${produk.id}']`).css('color','#abafb3')
-
+                    
                     var tr = tabel.find(`tr[id=${parseInt(i)+1}]`);
                     getSubtotal();
 
                     tr.find('.qty-plus').click(function(){
                         var oldValue = $(this).parent().parent().find('.input').val();
-                        $(this).parent().parent().find('input').val(parseInt(oldValue) + 10)
-                        var harga = tr.find('.harga_satuan').text();
-                        var jml = $(this).parent().parent().find('input').val();
-                        var total = parseInt(jml) * parseInt(harga) / 10;
-                        tr.find('.total').text(total);
+                        if(oldValue < produk.stok){
+                            $(this).parent().parent().find('input').val(parseInt(oldValue) + 10)
+                            var harga = tr.find('.harga_satuan').text();
+                            var jml = $(this).parent().parent().find('input').val();
+                            var total = parseInt(jml) * parseInt(harga) / 10;
+                            tr.find('.total').text(total);
 
                         getSubtotal();
+                        }
                     })
 
                     tr.find('.qty-min').click(function(){
