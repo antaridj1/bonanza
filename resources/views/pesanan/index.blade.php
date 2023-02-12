@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','penjualan | UD. Arisya')
+@section('title','Pesanan | UD. Arisya')
 
 @section('container')
 
@@ -12,18 +12,18 @@
     <div class="row page-titles mx-0">
         <div class="col p-md-0">
             <div>
-                <h4 class="d-inline" style="color: black;">Data Penjualan</h4>
+                <h4 class="d-inline" style="color: black;">Data Pesanan</h4>
                 @if(auth()->user()->isOwner == false)
-                    <p class="text-muted">Anda telah menangani sebanyak {{ $penjualans->count() }} pesanan </p>
+                    <p class="text-muted">Anda telah menangani sebanyak {{ $pesanans->count() }} pesanan </p>
                 @else
-                    <p class="text-muted">Total pesanan sebanyak {{ $penjualans->count() }} penjualan </p>
+                    <p class="text-muted">Total pesanan sebanyak {{ $pesanans->count() }} pesanan </p>
                 @endif
             </div>
         </div>
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Penjualan</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">pesanan</a></li>
             </ol>
         </div>
     </div>
@@ -37,7 +37,7 @@
                             <span>Filter data dari tanggal:</span>
                         </div>
                         <div class="col-8 mb-3">
-                            <form action="/penjualan">
+                            <form action="/pesanan">
                                 @if(request('status'))
                                     <input type="hidden" name="status" value="{{ request('status') }}">
                                 @endif 
@@ -57,11 +57,11 @@
                     <div class="d-flex">
                         @if(auth()->user()->isOwner == true)
                         <div class="dropdown">
-                            <a href="{{ route('penjualan.cetak') }}" class="btn btn-secondary shadow-sm mr-2">Cetak PDF</a>
+                            <a href="{{ route('pesanan.cetak') }}" class="btn btn-secondary shadow-sm mr-2">Cetak PDF</a>
                         </div>
                         @endif
                         
-                        <form action="/penjualan">
+                        <form action="/pesanan">
                             @if(request('status'))
                                 <input type="hidden" name="status" value="{{ request('status') }}">
                             @endif 
@@ -78,7 +78,7 @@
                         </form>
                     </div>
                 </div>
-                @if($penjualans->count() == 0)
+                @if($pesanans->count() == 0)
                     <div class="card">
                         <div class="card-body">
                             <div class="text-center">
@@ -87,13 +87,13 @@
                         </div>
                     </div>
                 @else
-                @foreach($penjualans as $penjualan) 
+                @foreach($pesanans as $pesanan) 
                 <div class="card border-primary ">
-                    <a href="penjualan/{{$penjualan->id}}" data-toggle="modal" data-target="#detail_{{$penjualan->id}}" class="penjualan">
+                    <a href="pesanan/{{$pesanan->id}}" data-toggle="modal" data-target="#detail_{{$pesanan->id}}" class="pesanan">
                         <div class="card-header pb-0">
                             <div class="d-flex justify-content-between">
-                                <p><b>{{ $penjualan->nama }}</b> ({{$penjualan->telp}})</p>
-                                <small>{{$penjualan->created_at->format('d/m/Y')}}</small>
+                                <p><b>{{ $pesanan->nama }}</b> ({{$pesanan->telp}})</p>
+                                <small>{{$pesanan->created_at->format('d/m/Y')}}</small>
                             </div>
                         </div>
                         <div class="d-flex justify-content-between">  
@@ -101,24 +101,24 @@
                                 <table class="table table-borderless col-6">
                                     <tr>
                                         <td>ID</td>
-                                        <td>: {{ $penjualan->id }}</td>
+                                        <td>: {{ $pesanan->id }}</td>
                                     </tr>
                                     <tr>
                                         <td>Alamat</td>
-                                        <td>: {{$penjualan->alamat}}</td>
+                                        <td>: {{$pesanan->alamat}}</td>
                                     </tr>
                                     <tr>
                                         <td>Tanggal Pemesanan</td>
-                                        <td>: {{$penjualan->tanggal_pemesanan}}</td>
+                                        <td>: {{$pesanan->tanggal_pemesanan}}</td>
                                     </tr>
                                     <tr>
                                         <td>Total Pesanan</td>
-                                        <td>: Rp {{number_format($penjualan->total_harga,0)}}</td>
+                                        <td>: Rp {{number_format($pesanan->total_harga,0)}}</td>
                                     </tr>
                                     @if(auth()->user()->isOwner == true)
                                         <tr>
                                             <td>Penanggungjawab</td>
-                                            <td>: {{$penjualan->karyawan->nama}}</td>
+                                            <td>: {{$pesanan->karyawan->nama}}</td>
                                         </tr>
                                     @endif
                                 </table>
@@ -130,14 +130,14 @@
                     </a>
                     <div class="card-footer">
                         <div class="d-flex justify-content-between">
-                            <small>Dibuat {{ $penjualan->created_at->diffForHumans()}}</small>
+                            <small>Dibuat {{ $pesanan->created_at->diffForHumans()}}</small>
                             @if(auth()->user()->isOwner == false)
                                 <div>
-                                    <a href="{{ route('penjualan.delete',$penjualan->id) }}" data-toggle="modal" data-target="#deletePenjualan_{{$penjualan->id}}"
+                                    <a href="{{ route('pesanan.delete',$pesanan->id) }}" data-toggle="modal" data-target="#deletepesanan_{{$pesanan->id}}"
                                           data-bs-toggle="tooltip" data-bs-placement="top" title="Hapus">
                                         <i class="icon-trash p-3"></i>
                                     </a>
-                                    <div class="modal fade" id="deletePenjualan_{{$penjualan->id}}">
+                                    <div class="modal fade" id="deletepesanan_{{$pesanan->id}}">
                                         <div class="modal-dialog modal-dialog-centered">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -145,11 +145,11 @@
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                             </div>
                                             <div class="modal-body">
-                                                <form method="post" action="{{ route('penjualan.delete',$penjualan->id) }}">
+                                                <form method="post" action="{{ route('pesanan.delete',$pesanan->id) }}">
                                                     @method('delete')
                                                     @csrf
                                                     <div class="form-group"> 
-                                                        <p>Apakah Anda yakin ingin menghapus data penjualan?</p>
+                                                        <p>Apakah Anda yakin ingin menghapus data pesanan?</p>
                                                     </div>
                                                     <div class="d-flex justify-content-between">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
@@ -166,7 +166,7 @@
                     </div>
                 </div>
 
-                <div class="modal fade" id="detail_{{$penjualan->id}}">
+                <div class="modal fade" id="detail_{{$pesanan->id}}">
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -178,24 +178,24 @@
                                 <table class="table table-borderless col-md-9 col-sm-12 ">
                                     <tr>
                                         <td>ID</td>
-                                        <td>: {{ $penjualan->id }}</td>
+                                        <td>: {{ $pesanan->id }}</td>
                                     </tr>
                                     <tr>
                                         <td>Nama Pembeli</td>
-                                        <td>: {{ $penjualan->nama }} ({{ $penjualan->telp }})</td>
+                                        <td>: {{ $pesanan->nama }} ({{ $pesanan->telp }})</td>
                                     </tr>
                                     <tr>
                                         <td>Alamat</td>
-                                        <td>: {{$penjualan->alamat}}</td>
+                                        <td>: {{$pesanan->alamat}}</td>
                                     </tr>
                                     <tr>
                                         <td>Tanggal Pemesanan</td>
-                                        <td>: {{$penjualan->tanggal_pemesanan}}</td>
+                                        <td>: {{$pesanan->tanggal_pemesanan}}</td>
                                     </tr>
                                     @if(auth()->user()->isOwner == true)
                                         <tr>
                                             <td>Penanggungjawab</td>
-                                            <td>: {{$penjualan->karyawan->nama}}</td>
+                                            <td>: {{$pesanan->karyawan->nama}}</td>
                                         </tr>
                                     @endif
                                 </table>
@@ -213,7 +213,7 @@
                                             $tot = 0;
                                             $jml = 0;
                                         @endphp
-                                        @foreach ($penjualan->detail_produk as $produk)
+                                        @foreach ($pesanan->detail_produk as $produk)
                                         <tr>
                                             <td>{{ $produk->produk->nama }}</td>
                                             <td>{{ $produk->jumlah }} Kg</td>
@@ -228,7 +228,7 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="3">SUBTOTAL</th>
-                                            <th class="text-right">Rp {{number_format($penjualan->total_harga,0)}}</th>
+                                            <th class="text-right">Rp {{number_format($pesanan->total_harga,0)}}</th>
                                         </tr>
                                     </tfoot>
                                 </table>

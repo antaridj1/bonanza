@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Penjualan;
+use App\Models\Pesanan;
 
-class PenjualanSeeder extends Seeder
+class PesananSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class PenjualanSeeder extends Seeder
      */
     public function run()
     {
-        $penjualans = 
+        $pesanans = 
         [
             [
                 'nama'=>'Putri Pramesti',
@@ -35,8 +35,8 @@ class PenjualanSeeder extends Seeder
             
         ];
 
-        foreach($penjualans as $penjualan){
-            Penjualan::create($penjualan);
+        foreach($pesanans as $pesanan){
+            Pesanan::create($pesanan);
         }
     }
 }

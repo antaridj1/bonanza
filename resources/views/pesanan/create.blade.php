@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','Penjualan | UD. Arisya')
+@section('title','Pesanan | UD. Arisya')
 
 @section('container')
 
@@ -12,7 +12,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Penjualan</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Pesanan</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Tambah Data</a></li>
             </ol>
         </div>
@@ -23,7 +23,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-validation">
-                            <form class="form-valide" action="{{route('penjualan.store')}}" method="post">
+                            <form class="form-valide" action="{{route('pesanan.store')}}" method="post">
                                 @csrf
                                 <div class="form-group row">
                                     <label class="col-lg-4 col-form-label" for="nama">Nama Pembeli <span class="text-danger">*</span>
@@ -154,7 +154,7 @@
 $(document).ready(function(){
     
     $("#button_produk").click(function(){
-        $.get("{{ route('penjualan.getProduk') }}",function(produks){
+        $.get("{{ route('pesanan.getProduk') }}",function(produks){
             let reqproduk = $("#select_produk").val();
             const tabel = $("#tabel_produk");
             $.each(produks, function(i,produk){

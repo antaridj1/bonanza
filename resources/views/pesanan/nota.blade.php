@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','penjualan | UD. Arisya')
+@section('title','pesanan | UD. Arisya')
 
 @section('container')
 
@@ -13,7 +13,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Tambah Penjualan</a></li>
+                <li class="breadcrumb-item"><a href="javascript:void(0)">Tambah pesanan</a></li>
                 <li class="breadcrumb-item active"><a href="javascript:void(0)">Nota</a></li>
             </ol>
         </div>
@@ -24,10 +24,10 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                     <div>
-                        <h4 class="d-inline">Nota Penjualan</h4>
+                        <h4 class="d-inline">Nota pesanan</h4>
                     </div>
                     <div class="dropdown">
-                        <a href="{{ route('penjualan.cetakNota') }}" class="btn btn-secondary shadow-sm mb-2">Cetak PDF</a>
+                        <a href="{{ route('pesanan.cetakNota') }}" class="btn btn-secondary shadow-sm mb-2">Cetak PDF</a>
                     </div>
                 </div>
 
@@ -36,19 +36,19 @@
                         <table class="table table-borderless col-md-9 col-sm-12 ">
                             <tr>
                                 <td>ID</td>
-                                <td>: {{ $penjualan->id }}</td>
+                                <td>: {{ $pesanan->id }}</td>
                             </tr>
                             <tr>
                                 <td>Nama Pembeli</td>
-                                <td>: {{ $penjualan->nama }} ({{ $penjualan->telp }})</td>
+                                <td>: {{ $pesanan->nama }} ({{ $pesanan->telp }})</td>
                             </tr>
                             <tr>
                                 <td>Alamat</td>
-                                <td>: {{$penjualan->alamat}}</td>
+                                <td>: {{$pesanan->alamat}}</td>
                             </tr>
                             <tr>
                                 <td>Tanggal Pembelian</td>
-                                <td>: {{$penjualan->created_at->format('d M Y')}}</td>
+                                <td>: {{$pesanan->created_at->format('d M Y')}}</td>
                             </tr>
                         </table>
                         <table class="table col-12">
@@ -65,7 +65,7 @@
                                     $tot = 0;
                                     $jml = 0;
                                 @endphp
-                                @foreach ($penjualan->detail_produk as $produk)
+                                @foreach ($pesanan->detail_produk as $produk)
                                 <tr>
                                     <td>{{ $produk->produk->nama }} {{ $produk->produk->ukuran }}</td>
                                     
@@ -91,7 +91,7 @@
                             <tfoot>
                                 <tr>
                                     <th colspan="3">SUBTOTAL</th>
-                                    <th class="text-right">Rp {{number_format($penjualan->total_harga,0)}}</th>
+                                    <th class="text-right">Rp {{number_format($pesanan->total_harga,0)}}</th>
                                 </tr>
                             </tfoot>
                         </table>         

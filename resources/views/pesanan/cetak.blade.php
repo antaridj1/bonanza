@@ -12,7 +12,7 @@
 <body>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title text-center mb-5">Data Penjualan</h4>
+            <h4 class="card-title text-center mb-5">Data Pesanan</h4>
             <div class="table-responsive">
             <table class="table table-striped table-bordered text-center">
                 <thead>
@@ -25,13 +25,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach ($penjualans as $penjualan)
+                @foreach ($pesanans as $pesanan)
                 <tr> 
                     <td>{{$loop->iteration}}</td>
-                    <td>{{$penjualan->tanggal_pemesanan}}</td>
-                    <td>{{$penjualan->nama}}</td>
-                    <td>{{$penjualan->alamat}}</td>
-                    <td>{{number_format($penjualan->total_harga,0)}}</td>
+                    <td>{{$pesanan->tanggal_pemesanan}}</td>
+                    <td>{{$pesanan->nama}}</td>
+                    <td>{{$pesanan->alamat}}</td>
+                    <td>{{number_format($pesanan->total_harga,0)}}</td>
                 </tr>
                 @endforeach
                 </tbody>

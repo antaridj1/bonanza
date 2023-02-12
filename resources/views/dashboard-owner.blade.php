@@ -12,9 +12,9 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card gradient-4">
                     <div class="card-body">
-                        <h3 class="card-title text-white">Penjualan</h3>
+                        <h3 class="card-title text-white">Pesanan</h3>
                         <div class="d-inline-block">
-                            <h2 class="text-white">{{ number_format($penjualan,0) }}</h2>
+                            <h2 class="text-white">{{ number_format($pesanan,0) }}</h2>
                             <p class="text-white mb-0">Jan - {{ $month }} {{ $year}}</p>
                         </div>
                         <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>

@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Penjualan extends Model
+class Pesanan extends Model
 {
     use HasFactory;
 
@@ -27,7 +27,7 @@ class Penjualan extends Model
 
     public function detail_produk()
     {
-        return $this->hasMany(DetailProduk::class, 'penjualans_id');
+        return $this->hasMany(DetailProduk::class, 'pesanans_id');
     }
 
     public function scopeFilter($query, array $filter){

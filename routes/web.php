@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PenjualanController;
+use App\Http\Controllers\PesananController;
 use App\Http\Controllers\PengeluaranController;
 
 /*
@@ -57,16 +57,16 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/profil', [UserController::class, 'profil'])->name('profil');
     Route::put('editpass/{user}', [UserController::class, 'updatePass'])->name('editpass');
 
-    Route::group(['prefix' => 'penjualan', 'as' => 'penjualan.'], function () {
-        Route::get('/', [PenjualanController::class, 'index'])->name('index');
-        Route::get('create', [PenjualanController::class, 'create'])->name('create');
-        Route::get('getProduk', [PenjualanController::class, 'getProduk'])->name('getProduk');
-        Route::post('create', [PenjualanController::class, 'store'])->name('store');
-        Route::patch('/{penjualan}', [PenjualanController::class, 'update'])->name('editStatus');
-        Route::delete('delete/{penjualan}', [PenjualanController::class, 'destroy'])->name('delete');
-        Route::get('cetak', [PenjualanController::class, 'cetak'])->name('cetak');
-        Route::get('nota', [PenjualanController::class, 'nota'])->name('nota');
-        Route::get('cetak-nota', [PenjualanController::class, 'cetakNota'])->name('cetakNota');
+    Route::group(['prefix' => 'pesanan', 'as' => 'pesanan.'], function () {
+        Route::get('/', [PesananController::class, 'index'])->name('index');
+        Route::get('create', [PesananController::class, 'create'])->name('create');
+        Route::get('getProduk', [PesananController::class, 'getProduk'])->name('getProduk');
+        Route::post('create', [PesananController::class, 'store'])->name('store');
+        Route::patch('/{pesanan}', [PesananController::class, 'update'])->name('editStatus');
+        Route::delete('delete/{pesanan}', [PesananController::class, 'destroy'])->name('delete');
+        Route::get('cetak', [PesananController::class, 'cetak'])->name('cetak');
+        Route::get('nota', [PesananController::class, 'nota'])->name('nota');
+        Route::get('cetak-nota', [PesananController::class, 'cetakNota'])->name('cetakNota');
     });
 
     Route::group(['prefix' => 'pengeluaran', 'as' => 'pengeluaran.'], function () {

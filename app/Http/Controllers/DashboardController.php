@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\DetailProduk;
 use App\Models\Pengeluaran;
-use App\Models\Penjualan;
+use App\Models\Pesanan;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,22 +16,22 @@ class DashboardController extends Controller
 
         $year = Carbon::now()->year;
         $month = Carbon::now()->format('M');
-        $penjualan = Penjualan::selectRaw('sum(total_harga) as sum')->whereYear('created_at',$year)->value('sum');
+        $pesanan = Pesanan::selectRaw('sum(total_harga) as sum')->whereYear('created_at',$year)->value('sum');
         $pengeluaran = Pengeluaran::selectRaw('sum(biaya) as sum')->whereYear('created_at',$year)->value('sum');
-        $profit = $penjualan - $pengeluaran;
+        $profit = $pesanan - $pengeluaran;
         $stok_kosong = count(Produk::where('stok','0')->get());
         $produk = DetailProduk::selectRaw('sum(jumlah) as sum')->whereYear('created_at',$year)->value('sum');
-        return view('dashboard-owner',compact(['penjualan','profit','stok_kosong','produk','year','month']));
+        return view('dashboard-owner',compact(['pesanan','profit','stok_kosong','produk','year','month']));
     }
 
     public function indexKaryawan(){
         $year = Carbon::now()->year; 
         $id = Auth::id();
         $stok_kosong = count(Produk::where('stok','0')->get());
-        $penjualans = Penjualan::where('karyawans_id',$id)->get();
-        $penjualan = Penjualan::where('karyawans_id',$id)->orderBy('created_at','DESC')->first();
-        $penjualan_per_tahun = count(Penjualan::where('karyawans_id',$id)->whereYear('created_at',$year)->pluck('id'));
-        return view('dashboard-karyawan',compact(['penjualans','penjualan','penjualan_per_tahun','stok_kosong']));
+        $pesanans = Pesanan::where('karyawans_id',$id)->get();
+        $pesanan = Pesanan::where('karyawans_id',$id)->orderBy('created_at','DESC')->first();
+        $pesanan_per_tahun = count(Pesanan::where('karyawans_id',$id)->whereYear('created_at',$year)->pluck('id'));
+        return view('dashboard-karyawan',compact(['pesanans','pesanan','pesanan_per_tahun','stok_kosong']));
     }
 
     public function getProduks(Request $request){
@@ -67,7 +67,7 @@ class DashboardController extends Controller
                     ->orderBy('month','DESC')
                     ->get()->toArray();
     
-        $pemasukans = Penjualan::selectRaw('year(tanggal_pemesanan) year, monthname(tanggal_pemesanan) month, sum(total_harga) as sum')
+        $pemasukans = Pesanan::selectRaw('year(tanggal_pemesanan) year, monthname(tanggal_pemesanan) month, sum(total_harga) as sum')
                     ->whereYear('tanggal_pemesanan',$year)
                     ->groupBy('year','month')
                     ->orderBy('month','DESC')

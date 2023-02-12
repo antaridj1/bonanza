@@ -8,8 +8,8 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('penjualan.index') }}" aria-expanded="false">
-                                <i class="icon-chart"></i><span class="nav-text">Data Pemesanan</span>
+                            <a href="{{ route('pesanan.index') }}" aria-expanded="false">
+                                <i class="icon-chart"></i><span class="nav-text">Data Pesanan</span>
                             </a>
                         </li>
                         <li>
@@ -31,11 +31,11 @@
                         </li>
                         <li>
                             <a class="has-arrow" href="javascript:void()" aria-expanded="false">
-                                <i class="icon-basket-loaded"></i> <span class="nav-text">Pemesanan</span>
+                                <i class="icon-basket-loaded"></i> <span class="nav-text">Pesanan</span>
                             </a>
                             <ul aria-expanded="false">
-                                <li><a href="{{route('penjualan.index')}}">Data Pemesanan</a></li>
-                                <li><a href="{{route('penjualan.create')}}">Tambah Pemesanan</a></li>
+                                <li><a href="{{route('pesanan.index')}}">Data Pesanan</a></li>
+                                <li><a href="{{route('pesanan.create')}}">Tambah Pesanan</a></li>
                             </ul>
                         </li>
                         <li>
@@ -56,8 +56,8 @@
                         </li>
 
                         <li>
-                            <a href="{{ route('penjualan.index') }}" aria-expanded="false">
-                                <i class="icon-chart"></i><span class="nav-text">Penjualan</span>
+                            <a href="{{ route('pesanan.index') }}" aria-expanded="false">
+                                <i class="icon-chart"></i><span class="nav-text">Pesanan</span>
                             </a>
                         </li>
                 </ul>

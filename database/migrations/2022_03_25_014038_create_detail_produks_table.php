@@ -16,9 +16,9 @@ class CreateDetailProduksTable extends Migration
         Schema::create('detail_produks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('produks_id');
-            $table->unsignedBigInteger('penjualans_id');
+            $table->unsignedBigInteger('pesanans_id');
             $table->foreign('produks_id')->references('id')->on('produks');
-            $table->foreign('penjualans_id')->references('id')->on('penjualans')->onDelete('cascade');
+            $table->foreign('pesanans_id')->references('id')->on('pesanans')->onDelete('cascade');
             $table->integer('jumlah')->unsigned();
             $table->timestamps();
         });

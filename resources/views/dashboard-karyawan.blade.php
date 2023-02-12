@@ -26,7 +26,7 @@
                     <div class="card-body">
                         <h3 class="card-title text-white">Total Pesanan</h3>
                         <div class="d-inline-block">
-                            <h2 class="text-white">{{ $penjualan_per_tahun }}</h2>
+                            <h2 class="text-white">{{ $pesanan_per_tahun }}</h2>
                             <p class="text-white mb-0">Jan - Des 2022</p>
                         </div>
                         <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
@@ -37,14 +37,14 @@
         <div class="row">
             <div class="col-12">
                 <div>
-                    <p class="text-muted">Penjualan Terakhir Anda</p>
+                    <p class="text-muted">Pesanan Terakhir</p>
                 </div>
-                @if($penjualan !== null)
+                @if($pesanan !== null)
                     <div class="card border-primary">
                             <div class="card-header pb-0">
                                 <div class="d-flex justify-content-between">
-                                    <p><b>{{ $penjualan->nama }}</b> ({{$penjualan->telp}})</p>
-                                    <small>{{$penjualan->created_at->format('d M Y')}}</small>
+                                    <p><b>{{ $pesanan->nama }}</b> ({{$pesanan->telp}})</p>
+                                    <small>{{$pesanan->created_at->format('d M Y')}}</small>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between">  
@@ -52,22 +52,22 @@
                                     <table class="table table-borderless col-6">
                                         <tr>
                                             <td>ID</td>
-                                            <td>: {{ $penjualan->id }}</td>
+                                            <td>: {{ $pesanan->id }}</td>
                                         </tr>
                                         <tr>
                                             <td>Alamat</td>
-                                            <td>: {{$penjualan->alamat}}</td>
+                                            <td>: {{$pesanan->alamat}}</td>
                                         </tr>
                                         <tr>
-                                            <td>Total Pembelian</td>
-                                            <td>: Rp {{number_format($penjualan->total_harga,0)}}</td>
+                                            <td>Total Pesanan</td>
+                                            <td>: Rp {{number_format($pesanan->total_harga,0)}}</td>
                                         </tr>
                                     </table>
                                 </div>
                             </div>
                         <div class="card-footer">
                             <div class="d-flex justify-content-between">
-                                <small>Last updated {{ $penjualan->updated_at->diffForHumans()}}</small>
+                                <small>Last updated {{ $pesanan->updated_at->diffForHumans()}}</small>
                                 <div>
                                     
                                 </div>
