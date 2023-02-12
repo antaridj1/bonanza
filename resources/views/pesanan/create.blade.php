@@ -187,14 +187,14 @@ $(document).ready(function(){
                     $("#select_produk").find(`option[value='${produk.id}']`).css('color','#abafb3')
 
                     var tr = tabel.find(`tr[id=${parseInt(i)+1}]`);
-                    console.log()
+                    getSubtotal();
 
                     tr.find('.qty-plus').click(function(){
                         var oldValue = $(this).parent().parent().find('.input').val();
                         $(this).parent().parent().find('input').val(parseInt(oldValue) + 10)
                         var harga = tr.find('.harga_satuan').text();
                         var jml = $(this).parent().parent().find('input').val();
-                        var total = parseInt(jml) * parseInt(harga);
+                        var total = parseInt(jml) * parseInt(harga) / 10;
                         tr.find('.total').text(total);
 
                         getSubtotal();
@@ -206,7 +206,7 @@ $(document).ready(function(){
                             $(this).parent().parent().find('input').val(parseInt(oldValue) - 10)
                             var harga = tr.find('.harga_satuan').text();
                             var jml = $(this).parent().parent().find('input').val();
-                            var total = parseInt(jml) * parseInt(harga);
+                            var total = parseInt(jml) * parseInt(harga) / 10;
                             tr.find('.total').text(total);
 
                             getSubtotal();
