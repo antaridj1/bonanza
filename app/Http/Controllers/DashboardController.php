@@ -21,7 +21,7 @@ class DashboardController extends Controller
         $profit = $pesanan - $pengeluaran;
         $stok_kosong = count(Produk::where('stok','0')->get());
         $produk = DetailProduk::selectRaw('sum(jumlah) as sum')->whereYear('created_at',$year)->value('sum');
-        return view('dashboard-owner',compact(['pesanan','profit','stok_kosong','produk','year','month']));
+        return view('dashboard-owner',compact(['pesanan','profit','stok_kosong','produk','year','month', 'pengeluaran']));
     }
 
     public function indexKaryawan(){

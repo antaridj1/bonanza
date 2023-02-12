@@ -36,10 +36,10 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card gradient-2">
                     <div class="card-body">
-                        <h3 class="card-title text-white">Stok Kosong</h3>
+                        <h3 class="card-title text-white">Pengeluaran</h3>
                         <div class="d-inline-block">
-                            <h2 class="text-white">{{ $stok_kosong }}</h2>
-                            <p class="text-white mb-0">Hari Ini</p>
+                            <h2 class="text-white">{{ number_format($pengeluaran,0) }}</h2>
+                            <p class="text-white mb-0">Jan - {{ $month }} {{ $year}}</p>
                         </div>
                         <span class="float-right display-5 opacity-5"><i class="fa fa-archive"></i></span>
                     </div>

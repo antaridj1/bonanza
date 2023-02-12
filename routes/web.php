@@ -7,6 +7,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\PengeluaranController;
+use App\Http\Controllers\PenjualanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +76,11 @@ Route::middleware(['auth'])->group(function () {
         Route::patch('/edit/{pengeluaran}', [PengeluaranController::class, 'update'])->name('update');
         Route::delete('delete/{pengeluaran}', [PengeluaranController::class, 'destroy'])->name('delete');
         Route::get('cetak', [PengeluaranController::class, 'cetak'])->name('cetak');
+    });
+
+    Route::group(['prefix' => 'penjualan', 'as' => 'penjualan.'], function () {
+        Route::get('/', [PenjualanController::class, 'index'])->name('index');
+        Route::get('cetak', [PenjualanController::class, 'cetak'])->name('cetak');
     });
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');

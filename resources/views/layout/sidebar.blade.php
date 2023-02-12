@@ -56,10 +56,11 @@
                         </li>
 
                         <li>
-                            <a href="{{ route('pesanan.index') }}" aria-expanded="false">
-                                <i class="icon-chart"></i><span class="nav-text">Pesanan</span>
+                            <a href="{{ route('penjualan.index') }}" aria-expanded="false">
+                                <i class="icon-chart"></i><span class="nav-text">Penjualan</span>
                             </a>
                         </li>
+
                 </ul>
             </div>
         </div>

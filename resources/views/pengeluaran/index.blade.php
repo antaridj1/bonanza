@@ -93,6 +93,8 @@
                                                         </div>
                                                         @enderror
                                                     </div>
+                                                    <input type="hidden" value="{{$pengeluaran->tanggal_pengeluaran}}" id="tanggal_pengeluaran_hidden" name="tanggal_pengeluaran">
+                                                   
                                                     <div class="form-group mt-2">
                                                         <label for="biaya">Biaya</label>
                                                         <input type="text" min="1" class="form-control @error('biaya') is-invalid @enderror" value="{{ $pengeluaran->biaya }}" id="biaya" name="biaya" >
