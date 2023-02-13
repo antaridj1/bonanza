@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','Dashboard | UD. Arisya')
+@section('title','Dashboard | UD. Bonanza Fish')
 
 @section('container')
 

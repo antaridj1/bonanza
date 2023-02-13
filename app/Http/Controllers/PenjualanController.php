@@ -28,12 +28,12 @@ class PenjualanController extends Controller
         $months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
         foreach ($months as $key => $month) {
             $penjualans[$key]['month'] = $month;
-          
+         
             $array = array_search($month, array_column($pengeluarans, 'month'));
-            $penjualans[$key]['pengeluaran'] = $array === false ? 0 : $pengeluarans[$key]['sum'];
+            $penjualans[$key]['pengeluaran'] = $array === false ? 0 : $pengeluarans[$array]['sum'];
 
             $array2 = array_search($month, array_column($pemasukans, 'month'));
-            $penjualans[$key]['pemasukan'] = $array2 === false ? 0 : $pemasukans[$key]['sum'];
+            $penjualans[$key]['pemasukan'] = $array2 === false ? 0 : $pemasukans[$array2]['sum'];
 
             $penjualans[$key]['profit'] = $penjualans[$key]['pemasukan'] - $penjualans[$key]['pengeluaran'];
            
@@ -75,10 +75,10 @@ class PenjualanController extends Controller
             $penjualans[$key]['month'] = $month;
           
             $array = array_search($month, array_column($pengeluarans, 'month'));
-            $penjualans[$key]['pengeluaran'] = $array === false ? 0 : $pengeluarans[$key]['sum'];
+            $penjualans[$key]['pengeluaran'] = $array === false ? 0 : $pengeluarans[$array]['sum'];
 
             $array2 = array_search($month, array_column($pemasukans, 'month'));
-            $penjualans[$key]['pemasukan'] = $array2 === false ? 0 : $pemasukans[$key]['sum'];
+            $penjualans[$key]['pemasukan'] = $array2 === false ? 0 : $pemasukans[$array2]['sum'];
 
             $penjualans[$key]['profit'] = $penjualans[$key]['pemasukan'] - $penjualans[$key]['pengeluaran'];
            

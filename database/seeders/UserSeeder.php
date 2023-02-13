@@ -25,8 +25,17 @@ class UserSeeder extends Seeder
                 'status'=>true,
             ],
             [
-                'nama' => 'Admin',
+                'nama' => 'Admin 1',
                 'username' => 'admin123',
+                'password'=> bcrypt('123'),
+                'alamat'=> 'Jalan Imam Bojol No.2',
+                'telp'=>'089678678677',
+                'isOwner'=>false,
+                'status'=>true,
+            ],
+            [
+                'nama' => 'Admin 2',
+                'username' => 'adminn123',
                 'password'=> bcrypt('123'),
                 'alamat'=> 'Jalan Imam Bojol No.2',
                 'telp'=>'089678678677',

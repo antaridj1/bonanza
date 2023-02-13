@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','Profil | UD. Arisya')
+@section('title','Profil | UD. Bonanza Fish')
 
 @section('container')
 

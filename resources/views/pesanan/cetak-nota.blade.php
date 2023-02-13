@@ -12,7 +12,7 @@
 <body>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title" style="text-indent: 25%">UD. ARISYA</h4>
+            <h4 class="card-title" style="text-indent: 25%">UD. Bonanza Fish</h4>
             <h4 class="card-title mb-5" style="text-indent: 24%">Nota Pesanan</h4>
             <table class="table table-borderless col-5">
                 <tr>

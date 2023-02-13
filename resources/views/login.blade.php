@@ -1,6 +1,6 @@
 @extends('layout.app')
 
-@section('title','Login | UD. Arisya')
+@section('title','Login | UD. Bonanza Fish')
 
 @section('container')
 <div class="content-body ml-0">
