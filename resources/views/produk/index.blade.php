@@ -53,7 +53,7 @@
                                     <th>Harga Satuan (Rp)</th>
                                     <th>Stok</th>
                                     <th>Keterangan</th>
-                                    @if(auth()->user()->isOwner === false)
+                                    @if(auth()->user()->isOwner == false)
                                     <th>Aksi</th>
                                     @endif
                                 </tr>
@@ -87,7 +87,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                @if(auth()->user()->isOwner === false)
+                                @if(auth()->user()->isOwner == false)
                                 <td>
                                     <a href="{{route('produk.edit', $produk->id)}}" class="label label-secondary m-1" 
                                      data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">

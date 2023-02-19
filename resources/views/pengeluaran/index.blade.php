@@ -53,7 +53,7 @@
                                         <th>Tanggal</th>
                                         <th>Nama Pengeluaran</th>
                                         <th>Biaya (Rp)</th>
-                                        @if(auth()->user()->isOwner === false)
+                                        @if(auth()->user()->isOwner == false)
                                         <th>Aksi</th>
                                         @endif
                                     </tr>
@@ -65,7 +65,7 @@
                                     <td>{{$pengeluaran->tanggal_pengeluaran}}</td>
                                     <td>{{$pengeluaran->nama}}</td>
                                     <td>{{number_format($pengeluaran->biaya,0)}}</td>
-                                @if(auth()->user()->isOwner === false)
+                                @if(auth()->user()->isOwner == false)
                                     <td>
                                         <a href="{{route('pengeluaran.index', $pengeluaran->id)}}" class="label label-secondary m-1" data-toggle="modal" data-target="#edit_{{$pengeluaran->id}}"
                                             data-bs-toggle="tooltip" data-bs-placement="top" title="Edit">
