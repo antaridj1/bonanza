@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
 {
-    public function index(){
-        $year = Carbon::now()->year;
+    public function index(Request $request){
+        $years = Pesanan::selectRaw('year(tanggal_pemesanan) year')->groupBy('year')->orderBy('year','DESC')->distinct()->pluck('year');
+        $year = $request->year ?? Carbon::now()->year;
+
         $pengeluarans = Pengeluaran::selectRaw('year(tanggal_pengeluaran) year, monthname(tanggal_pengeluaran) month, sum(biaya) as sum')
                     ->whereYear('tanggal_pengeluaran',$year)
                     ->groupBy('year','month')
@@ -51,7 +53,7 @@ class PenjualanController extends Controller
                     
         $data_penjualan = (int)$data_pemasukan - (int)$data_pengeluaran;
 
-        return view('penjualan.index', compact('penjualans', 'data_pengeluaran', 'data_pemasukan', 'data_penjualan'));
+        return view('penjualan.index', compact('years','penjualans', 'data_pengeluaran', 'data_pemasukan', 'data_penjualan'));
     }
     
     public function cetak(){

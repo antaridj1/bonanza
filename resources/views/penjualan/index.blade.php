@@ -34,6 +34,16 @@
                                     </span>
                                 </div>
                             </form>
+                            <div class="dropdown ml-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                  {{ (request('year'))?? Carbon\Carbon::now()->year}}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    @foreach ($years as $year)
+                                        <li><a class="dropdown-item" href="{{route('penjualan.index')}}?year={{$year}}">{{$year}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                             <div class="dropdown">
                                 <a href="{{ route('penjualan.cetak') }}" class="btn btn-secondary shadow-sm mx-2">Cetak PDF</a>
                             </div>
@@ -79,5 +89,6 @@
         </div>
     </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 @endsection

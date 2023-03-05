@@ -56,6 +56,7 @@
                                     @if(auth()->user()->isOwner === false)
                                     <th>Aksi</th>
                                     @endif
+                                    
                                 </tr>
                             </thead>
                             <tbody>
