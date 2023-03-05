@@ -51,8 +51,8 @@ class PengeluaranController extends Controller
                 'tanggal_pengeluaran' => 'required'
             ]);
 
-            $pengeluaran->update($request->all());
-
+            $test = $pengeluaran->update($request->all());
+            
         }catch(Exception $e){
             Log::info($e->getMessage());
             return back()->withInput()->with('error', 'Gagal mengedit pengeluaran');
