@@ -10,8 +10,8 @@
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-lg-6 col-sm-12">
-                <div class="card gradient-4">
-                    <a href="{{route('produk.stokKosong')}}">
+                <a href="{{route('produk.stokKosong')}}">
+                    <div class="card gradient-4">
                         <div class="card-body">
                             <h3 class="card-title text-white">Stok Kosong</h3>
                             <div class="d-inline-block">
@@ -20,20 +20,22 @@
                             </div>
                             <span class="float-right display-5 opacity-5"><i class="fa fa-archive"></i></span>
                         </div>
-                    </a>
-                </div>
+                    </div>
+                </a>
             </div>
             <div class="col-lg-6 col-sm-12">
-                <div class="card gradient-1">
-                    <div class="card-body">
-                        <h3 class="card-title text-white">Total Pesanan</h3>
-                        <div class="d-inline-block">
-                            <h2 class="text-white">{{ $pesanan_per_tahun }}</h2>
-                            <p class="text-white mb-0">Jan - Des 2023</p>
+                <a href="{{route('pesanan.index')}}">
+                    <div class="card gradient-1">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Total Pesanan</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white">{{ $pesanan_per_tahun }}</h2>
+                                <p class="text-white mb-0">Jan - Des 2023</p>
+                            </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
                         </div>
-                        <span class="float-right display-5 opacity-5"><i class="fa fa-shopping-cart"></i></span>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
         <div class="row">

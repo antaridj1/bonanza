@@ -132,4 +132,23 @@ class PesananController extends Controller
         $pesanan = Pesanan::where('karyawans_id',Auth::id())->orderBy('created_at','DESC')->first();
         return view('pesanan.cetak-nota',compact('pesanan'));
     }
+
+    public function produkTerjual(){
+        $data_produks = Produk::pluck('nama','id');
+        $produks = Produk::pluck('nama');
+        $data_jumlah = DetailProduk::selectRaw('year(created_at) year, produks_id, sum(jumlah) as sum')
+            ->groupBy('year','produks_id')
+            ->orderBy('produks_id')
+            ->get()->toArray();
+
+            $jumlah = [];
+
+            foreach ($data_produks as $id => $produk) {
+                $id = array_search($id, array_column($data_jumlah, 'produks_id'));
+                $data = $id === false ? 0 : $data_jumlah[$id]['sum'];
+                array_push($jumlah, $data);
+            }
+
+        return view('pesanan.produk-terjual', compact('jumlah', 'produks'));
+    }
 }

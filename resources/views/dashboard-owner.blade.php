@@ -10,56 +10,64 @@
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="card gradient-4">
-                    <div class="card-body">
-                        <h3 class="card-title text-white">Pesanan</h3>
-                        <div class="d-inline-block">
-                            <h2 class="text-white">{{ number_format($pesanan,0) }}</h2>
-                            <p class="text-white mb-0">Jan - {{ $month }} {{ $year}}</p>
+                <a href="{{route('pesanan.index')}}">
+                    <div class="card gradient-4">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Pesanan</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white">{{ number_format($pesanan,0) }}</h2>
+                                <p class="text-white mb-0">Jan - {{ $month }} {{ $year}}</p>
+                            </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
                         </div>
-                        <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="card gradient-1">
-                    <div class="card-body">
-                        <h3 class="card-title text-white">Profit</h3>
-                        <div class="d-inline-block">
-                            <h2 class="text-white">{{ number_format($profit,0) }}</h2>
-                            <p class="text-white mb-0">Jan - {{ $month }} {{ $year}}</p>
+                <a href="{{route('penjualan.index')}}">
+                    <div class="card gradient-1">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Profit</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white">{{ number_format($profit,0) }}</h2>
+                                <p class="text-white mb-0">Jan - {{ $month }} {{ $year}}</p>
+                            </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-dollar"></i></span>
                         </div>
-                        <span class="float-right display-5 opacity-5"><i class="fa fa-dollar"></i></span>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="card gradient-2">
-                    <div class="card-body">
-                        <h3 class="card-title text-white">Pengeluaran</h3>
-                        <div class="d-inline-block">
-                            <h2 class="text-white">{{ number_format($pengeluaran,0) }}</h2>
-                            <p class="text-white mb-0">Jan - {{ $month }} {{ $year}}</p>
+                <a href="{{route('pengeluaran.index')}}">
+                    <div class="card gradient-2">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Pengeluaran</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white">{{ number_format($pengeluaran,0) }}</h2>
+                                <p class="text-white mb-0">Jan - {{ $month }} {{ $year}}</p>
+                            </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-archive"></i></span>
                         </div>
-                        <span class="float-right display-5 opacity-5"><i class="fa fa-archive"></i></span>
                     </div>
-                </div>
+                </a>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="card gradient-3">
-                    <div class="card-body">
-                        <h3 class="card-title text-white">Produk Terjual </h3>
-                        <div class="d-inline-block">
-                            @if ($produk !== null)
-                            <h2 class="text-white">{{ $produk }}</h2>
-                            @else
-                            <h2 class="text-white">0</h2>
-                            @endif
-                            <p class="text-white mb-0">Jan - {{ $month }} {{ $year}}</p>
+                <a href="{{route('pesanan.produkTerjual')}}">
+                    <div class="card gradient-3">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Produk Terjual </h3>
+                            <div class="d-inline-block">
+                                @if ($produk !== null)
+                                <h2 class="text-white">{{ $produk }}</h2>
+                                @else
+                                <h2 class="text-white">0</h2>
+                                @endif
+                                <p class="text-white mb-0">Jan - {{ $month }} {{ $year}}</p>
+                            </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-cart-arrow-down"></i></span>
                         </div>
-                        <span class="float-right display-5 opacity-5"><i class="fa fa-cart-arrow-down"></i></span>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
 

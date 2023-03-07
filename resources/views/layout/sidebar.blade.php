@@ -3,7 +3,7 @@
                 <ul class="metismenu" id="menu"> 
                     @if(auth()->user()->isOwner == true)
                         <li>
-                            <a href="/dashboard-owner" aria-expanded="false">
+                            <a href="/dashboard-owner" aria-expanded="false" class="{{Request::is('pesanan/produk-terjual')? 'active' : ''}}"">
                                 <i class="icon-speedometer menu-icon"></i><span class="nav-text">Dashboard</span>
                             </a>
                         </li>

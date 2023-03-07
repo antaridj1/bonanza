@@ -69,6 +69,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('cetak', [PesananController::class, 'cetak'])->name('cetak');
         Route::get('nota', [PesananController::class, 'nota'])->name('nota');
         Route::get('cetak-nota', [PesananController::class, 'cetakNota'])->name('cetakNota');
+        Route::get('/produk-terjual', [PesananController::class, 'produkTerjual'])->name('produkTerjual');
     });
 
     Route::group(['prefix' => 'pengeluaran', 'as' => 'pengeluaran.'], function () {
