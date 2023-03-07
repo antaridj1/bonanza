@@ -43,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('stok', [ProdukController::class, 'getStok'])->name('getStok');
         Route::patch('stok', [ProdukController::class, 'postStok'])->name('postStok');
         Route::get('cetak', [ProdukController::class, 'cetak'])->name('cetak');
+        Route::get('stok-kosong', [ProdukController::class, 'stokKosong'])->name('stokKosong');
     });
 
     Route::group(['prefix' => 'karyawan', 'as' => 'karyawan.'], function () {

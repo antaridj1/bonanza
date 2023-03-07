@@ -60,7 +60,17 @@
                             <a href="{{ route('pesanan.cetak') }}" class="btn btn-secondary shadow-sm mr-2">Cetak PDF</a>
                         </div>
                         @endif
-                        
+                        <div class="dropdown mr-2">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                              {{ (request('year'))?? 'Semua'}}
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="{{route('pesanan.index')}}">Semua</a></li>
+                                @foreach ($years as $year)
+                                    <li><a class="dropdown-item" href="{{route('pesanan.index')}}?year={{$year}}">{{$year}}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
                         <form action="/pesanan">
                             @if(request('status'))
                                 <input type="hidden" name="status" value="{{ request('status') }}">

@@ -7,6 +7,7 @@ use App\Models\Pengeluaran;
 use Exception;
 use Illuminate\Support\Facades\Log;
 use Barryvdh\DomPDF\PDF;
+use Carbon\Carbon;
 
 class PengeluaranController extends Controller
 {
@@ -16,10 +17,17 @@ class PengeluaranController extends Controller
      * @return \Illuminate\Http\Response
      */
     
-    public function index()
+    public function index(Request $request)
     {
-        $pengeluarans = Pengeluaran::orderBy('created_at','DESC')->cari(request(['search']))->paginate(10)->withQueryString();
-        return view('pengeluaran.index',compact('pengeluarans'));
+        $years = Pengeluaran::selectRaw('year(tanggal_pengeluaran) year')->groupBy('year')->orderBy('year','DESC')->distinct()->pluck('year');
+        $year = $request->year;
+        if($request->year){
+            $pengeluarans = Pengeluaran::whereYear('tanggal_pengeluaran', $year)->orderBy('created_at','DESC')->cari(request(['search']))->paginate(10)->withQueryString();
+        } else {
+             $pengeluarans = Pengeluaran::orderBy('created_at','DESC')->cari(request(['search']))->paginate(10)->withQueryString();
+        }
+       
+        return view('pengeluaran.index',compact('pengeluarans','years'));
     }
 
     public function store(Request $request)

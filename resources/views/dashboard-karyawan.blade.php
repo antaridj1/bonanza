@@ -11,14 +11,16 @@
         <div class="row">
             <div class="col-lg-6 col-sm-12">
                 <div class="card gradient-4">
-                    <div class="card-body">
-                        <h3 class="card-title text-white">Stok Kosong</h3>
-                        <div class="d-inline-block">
-                            <h2 class="text-white">{{ $stok_kosong }}</h2>
-                            <p class="text-white mb-0">Hari Ini</p>
+                    <a href="{{route('produk.stokKosong')}}">
+                        <div class="card-body">
+                            <h3 class="card-title text-white">Stok Kosong</h3>
+                            <div class="d-inline-block">
+                                <h2 class="text-white">{{ $stok_kosong }}</h2>
+                                <p class="text-white mb-0">Hari Ini</p>
+                            </div>
+                            <span class="float-right display-5 opacity-5"><i class="fa fa-archive"></i></span>
                         </div>
-                        <span class="float-right display-5 opacity-5"><i class="fa fa-archive"></i></span>
-                    </div>
+                    </a>
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12">

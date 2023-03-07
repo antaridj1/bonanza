@@ -23,6 +23,11 @@ class ProdukController extends Controller
         return view('produk.index',compact('produks'));
     }
 
+    public function StokKosong(){
+        $produks = Produk::where('stok',0)->paginate(10)->withQueryString();
+        return view('produk.stok-kosong',compact('produks'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

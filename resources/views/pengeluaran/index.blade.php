@@ -34,6 +34,17 @@
                                     </span>
                                 </div>
                             </form>
+                            <div class="dropdown ml-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                  {{ (request('year'))?? 'Semua'}}
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                    <li><a class="dropdown-item" href="{{route('pengeluaran.index')}}">Semua</a></li>
+                                    @foreach ($years as $year)
+                                        <li><a class="dropdown-item" href="{{route('pengeluaran.index')}}?year={{$year}}">{{$year}}</a></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                             <div class="dropdown">
                                 <a href="{{ route('pengeluaran.cetak') }}" class="btn btn-secondary shadow-sm mx-2">Cetak PDF</a>
                             </div>

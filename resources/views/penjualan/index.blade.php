@@ -13,7 +13,7 @@
         <div class="col p-md-0">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Penjualan</a></li>
+                <li class="breadcrumb-item active"><a href="javascript:void(0)">Laba Rugi</a></li>
             </ol>
         </div>
     </div>
@@ -22,7 +22,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Data Penjualan Tahun 2023</h4>
+                        <h4 class="card-title">Data Laba Rugi Tahun {{ (request('year'))?? Carbon\Carbon::now()->year}}</h4>
                         <div class="d-flex justify-content-end">
                             <form action="{{route('penjualan.index')}}">
                                 <div class="input-group">

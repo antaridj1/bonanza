@@ -14,19 +14,28 @@ class PesananController extends Controller
 {
     public function index(Request $request)
     {   
+        $years = Pesanan::selectRaw('year(tanggal_pemesanan) year')->groupBy('year')->orderBy('year','DESC')->distinct()->pluck('year');
+        $year = $request->year ;
         $date = null;
         if($request->daterange){
             $date = $request->daterange;
             $request['daterange'] = explode(' - ',$request->daterange);
         }
+        
+        if($request->year){
+            $pesanan = Pesanan::whereYear('tanggal_pemesanan',$year)->orderBy('created_at','DESC')->filter(request(['status','search','daterange']));
+        } else {
+            $pesanan = Pesanan::orderBy('created_at','DESC')->filter(request(['status','search','daterange']));
+        }
+        
         if(Auth::user()->isOwner == true){
-            $pesanans = Pesanan::orderBy('created_at','DESC')->filter(request(['status','search','daterange']))->paginate(10)->withQueryString();
+            $pesanans = $pesanan->paginate(10)->withQueryString();
         }else{
             $user_id = Auth::id();
-            $pesanans = Pesanan::orderBy('created_at','DESC')->where('karyawans_id',$user_id)->filter(request(['status','search','daterange']))->paginate(10)->withQueryString();
+            $pesanans = $pesanan->where('karyawans_id',$user_id)->paginate(10)->withQueryString();
         }
 
-        return view('pesanan.index',compact(['pesanans','date']));
+        return view('pesanan.index',compact('pesanans','date','years'));
         
     }
 

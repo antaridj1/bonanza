@@ -12,7 +12,7 @@
 <body>
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title text-center mb-5">Data Penjualan</h4>
+            <h4 class="card-title text-center mb-5">Laporan Laba Rugi</h4>
             <div class="table-responsive">
             <table class="table table-striped table-bordered text-center">
                 <thead>
