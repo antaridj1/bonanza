@@ -36,17 +36,17 @@
                             </form>
                             <div class="dropdown ml-2">
                                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                  {{ (request('year'))?? 'Semua'}}
+                                  {{ (request('year'))?? 'Semua Tahun'}}
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                    <li><a class="dropdown-item" href="{{route('pengeluaran.index')}}">Semua</a></li>
+                                    <li><a class="dropdown-item" href="{{route('pengeluaran.index')}}">Semua Tahun</a></li>
                                     @foreach ($years as $year)
                                         <li><a class="dropdown-item" href="{{route('pengeluaran.index')}}?year={{$year}}">{{$year}}</a></li>
                                     @endforeach
                                 </ul>
                             </div>
                             <div class="dropdown">
-                                <a href="{{ route('pengeluaran.cetak') }}" class="btn btn-secondary shadow-sm mx-2">Cetak PDF</a>
+                                <a href="{{ route('pengeluaran.cetak') }}{{request('year')? '?year='.request('year') : ''}}" class="btn btn-secondary shadow-sm mx-2">Cetak PDF</a>
                             </div>
                             @if(auth()->user()->isOwner == false)
                             <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#ModalTambah">

@@ -21,6 +21,7 @@ class PenjualanController extends Controller
    
         $pemasukans = Pesanan::selectRaw('year(tanggal_pemesanan) year, monthname(tanggal_pemesanan) month, sum(total_harga) as sum')
                     ->whereYear('tanggal_pemesanan',$year)
+                    ->where('status',1)
                     ->groupBy('year','month')
                     ->orderBy('month','DESC')
                     ->get()->toArray();
@@ -48,6 +49,7 @@ class PenjualanController extends Controller
    
         $data_pemasukan = Pesanan::selectRaw('year(tanggal_pemesanan) year, sum(total_harga) as sum')
                     ->whereYear('tanggal_pemesanan',$year)
+                    ->where('status',1)
                     ->groupBy('year')
                     ->value('sum');
                     
@@ -56,8 +58,8 @@ class PenjualanController extends Controller
         return view('penjualan.index', compact('years','penjualans', 'data_pengeluaran', 'data_pemasukan', 'data_penjualan'));
     }
     
-    public function cetak(){
-        $year = Carbon::now()->year;
+    public function cetak(Request $request){
+        $year = $request->year ?? Carbon::now()->year;
         $pengeluarans = Pengeluaran::selectRaw('year(tanggal_pengeluaran) year, monthname(tanggal_pengeluaran) month, sum(biaya) as sum')
                     ->whereYear('tanggal_pengeluaran',$year)
                     ->groupBy('year','month')
@@ -66,6 +68,7 @@ class PenjualanController extends Controller
    
         $pemasukans = Pesanan::selectRaw('year(tanggal_pemesanan) year, monthname(tanggal_pemesanan) month, sum(total_harga) as sum')
                     ->whereYear('tanggal_pemesanan',$year)
+                    ->where('status',1)
                     ->groupBy('year','month')
                     ->orderBy('month','DESC')
                     ->get()->toArray();
@@ -93,11 +96,12 @@ class PenjualanController extends Controller
    
         $data_pemasukan = Pesanan::selectRaw('year(tanggal_pemesanan) year, sum(total_harga) as sum')
                     ->whereYear('tanggal_pemesanan',$year)
+                    ->where('status',1)
                     ->groupBy('year')
                     ->value('sum');
                     
         $data_penjualan = (int)$data_pemasukan - (int)$data_pengeluaran;
 
-        return view('penjualan.cetak', compact('penjualans', 'data_pengeluaran', 'data_pemasukan', 'data_penjualan'));
+        return view('penjualan.cetak', compact('penjualans', 'data_pengeluaran', 'data_pemasukan', 'data_penjualan','year'));
     }
 }

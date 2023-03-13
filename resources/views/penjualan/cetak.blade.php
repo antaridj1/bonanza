@@ -10,9 +10,20 @@
 </head>
 
 <body>
+    <header>
+        <div class="row text-center">
+            <div class="col-12">
+                <img src="{{asset('assets/images/color-logo.svg')}}" class="mb-2" width="300px" alt="">
+                <h3>Laporan Laba Rugi Tahun {{$year !== null ? $year : Carbon\Carbon::year()}}</h3>
+                <h5>Alamat: Jalan imam bonjol gang segina utara no 1</h5>
+                <h5>Telp: 0361-480998</h5>
+            </div>
+            
+        </div>
+    </header>
+    <hr style="border: 1px solid rgb(114, 114, 114);">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title text-center mb-5">Laporan Laba Rugi</h4>
             <div class="table-responsive">
             <table class="table table-striped table-bordered text-center">
                 <thead>
@@ -37,8 +48,8 @@
                 </tbody>
                 <tfoot>
                     <tr>
-                        <th></th>
-                        <th></th>
+                        <th colspan="2">Subtotal (Rp)</th>
+                        
                         <th>{{number_format($data_pemasukan,0)}}</th>
                         <th>{{number_format($data_pengeluaran,0)}}</th>
                         <th>{{number_format($data_penjualan,0)}}</th>
@@ -46,10 +57,32 @@
                    
                 </tfoot>
             </table>
+                <table class="mt-5">
+                    <tr class="p-5">
+                        <th>Pemasukan</th>
+                        <th class="px-5">: Rp{{number_format($data_pemasukan,0)}}</th>
+                    </tr>
+                    <tr>
+                        <th>Pengeluaran</th>
+                        <th class="px-5">: Rp{{number_format($data_pengeluaran,0)}}</th>
+                    </tr>
+                    <tr>
+                        <th>{{$data_penjualan > 0 ? 'Laba' : 'Rugi'}}</th>
+                        <th class="px-5">: Rp{{number_format($data_penjualan,0)}}</th>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
-
+    <footer class="mt-5">
+        <div class="row d-flex justify-content-end">
+            <div class="col-4 text-center">
+                <p><b>Mengetahui,</b></p>
+                <p style="margin-bottom:100px"><b>Pemilik UD. Bonanza Fish</b></p>
+                <p><b>.............................................</b></p>
+            </div>
+        </div>
+    </footer>
 <script type="text/javascript">
     window.print();
 </script>

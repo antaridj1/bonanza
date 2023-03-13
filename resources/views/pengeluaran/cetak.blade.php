@@ -10,9 +10,20 @@
 </head>
 
 <body>
+    <header>
+        <div class="row text-center">
+            <div class="col-12">
+                <img src="{{asset('assets/images/color-logo.svg')}}" class="mb-2" width="300px" alt="">
+                <h3>Laporan Pengeluaran {{request('year') ? 'Tahun '.request('year') : ''}}</h3>
+                <h5>Alamat: Jalan imam bonjol gang segina utara no 1</h5>
+                <h5>Telp: 0361-480998</h5>
+            </div>
+            
+        </div>
+    </header>
+    <hr style="border: 1px solid rgb(114, 114, 114);">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title text-center mb-5">Data Pengeluaran</h4>
             <div class="table-responsive">
             <table class="table table-striped table-bordered text-center">
                 <thead>
@@ -33,11 +44,25 @@
                 </tr>
                 @endforeach
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <th class="text-left" colspan="3">Subtotal (Rp)</th>
+                        <th>{{number_format($total,0)}}</th>
+                    </tr>
+                </tfoot>
             </table>
             </div>
         </div>
     </div>
-
+<footer class="mt-5">
+    <div class="row d-flex justify-content-end">
+        <div class="col-4 text-center">
+            <p><b>Mengetahui,</b></p>
+            <p style="margin-bottom:100px"><b>Pemilik UD. Bonanza Fish</b></p>
+            <p><b>.............................................</b></p>
+        </div>
+    </div>
+</footer>
 <script type="text/javascript">
     window.print();
 </script>

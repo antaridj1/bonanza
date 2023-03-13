@@ -72,9 +72,37 @@
                         <div class="card-footer">
                             <div class="d-flex justify-content-between">
                                 <small>Last updated {{ $pesanan->updated_at->diffForHumans()}}</small>
-                                <div>
-                                    
-                                </div>
+                                @if ($pesanan->status == false)
+                                        <button type="button" class="btn btn-danger btn-xs ms-3 shadow-sm" data-toggle="modal" 
+                                            data-target="#editStatus_{{$pesanan->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah Status">
+                                            Belum Diproses
+                                        </button>
+                                        <div class="modal fade" id="editStatus_{{$pesanan->id}}">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Ubah Status</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post" action="{{ route('pesanan.editStatus',$pesanan->id) }}">
+                                                        @method('patch')
+                                                        @csrf
+                                                        <div class="form-group"> 
+                                                            <p>Anda hanya bisa mengubah status sekali jika pesanan telah diproses. Apakah pesanan sudah diproses?</p>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary" >Sudah Diproses </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    @else
+                                        <span class="label label-pill label-success btn-xs">Sudah Diproses</span>
+                                    @endif
                             </div>
                         </div>
                     </div>

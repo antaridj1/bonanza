@@ -16,7 +16,7 @@ class DashboardController extends Controller
 
         $year = Carbon::now()->year;
         $month = Carbon::now()->format('M');
-        $pesanan = Pesanan::selectRaw('sum(total_harga) as sum')->whereYear('created_at',$year)->value('sum');
+        $pesanan = Pesanan::selectRaw('sum(total_harga) as sum')->where('status',1)->whereYear('created_at',$year)->value('sum');
         $pengeluaran = Pengeluaran::selectRaw('sum(biaya) as sum')->whereYear('created_at',$year)->value('sum');
         $profit = $pesanan - $pengeluaran;
         $stok_kosong = count(Produk::where('stok','0')->get());
@@ -69,6 +69,7 @@ class DashboardController extends Controller
     
         $pemasukans = Pesanan::selectRaw('year(tanggal_pemesanan) year, monthname(tanggal_pemesanan) month, sum(total_harga) as sum')
                     ->whereYear('tanggal_pemesanan',$year)
+                    ->where('status',1)
                     ->groupBy('year','month')
                     ->orderBy('month','DESC')
                     ->get()->toArray();

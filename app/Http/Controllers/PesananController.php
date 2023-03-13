@@ -118,9 +118,23 @@ class PesananController extends Controller
             ->with('message','Berhasil menghapus data');
     }
 
-    public function cetak(){
-        $pesanans = Pesanan::all();
-        return view('pesanan.cetak',compact('pesanans'));
+    public function cetak(Request $request){
+
+        if($request->year){
+            $pesanans = Pesanan::whereYear('tanggal_pemesanan', $request->year);
+
+            $total = Pesanan::selectRaw('year(tanggal_pemesanan) year, sum(total_harga) as sum')
+            ->whereYear('tanggal_pemesanan',$request->year)
+            ->groupBy('year')
+            ->value('sum');
+        } else {
+             $pesanans = Pesanan::all();
+             
+             $total = Pesanan::selectRaw('sum(total_harga) as sum')
+             ->value('sum');
+        }
+       
+        return view('pesanan.cetak',compact('pesanans','total'));
     }
 
     public function nota(){

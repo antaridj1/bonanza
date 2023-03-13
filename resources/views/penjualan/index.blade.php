@@ -22,7 +22,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Data Laba Rugi Tahun {{ (request('year'))?? Carbon\Carbon::now()->year}}</h4>
+                        <h4 class="card-title">Informasi Laba Rugi Tahun {{ (request('year'))?? Carbon\Carbon::now()->year}}</h4>
                         <div class="d-flex justify-content-end">
                             <form action="{{route('penjualan.index')}}">
                                 <div class="input-group">
@@ -45,7 +45,7 @@
                                 </ul>
                             </div>
                             <div class="dropdown">
-                                <a href="{{ route('penjualan.cetak') }}" class="btn btn-secondary shadow-sm mx-2">Cetak PDF</a>
+                                <a href="{{ route('penjualan.cetak')}}?year={{request('year')}}" class="btn btn-secondary shadow-sm mx-2">Cetak PDF</a>
                             </div>
                         </div>
                         {{-- tabel --}}

@@ -83,8 +83,21 @@ class PengeluaranController extends Controller
             ->with('message','Berhasil menghapus data');
     }
 
-    public function cetak(){
-        $pengeluarans = Pengeluaran::all();
-        return view('pengeluaran.cetak',compact('pengeluarans'));
+    public function cetak(Request $request){
+        if($request->year){
+            $pengeluarans = Pengeluaran::whereYear('tanggal_pengeluaran', $request->year);
+
+            $total = Pengeluaran::selectRaw('year(tanggal_pengeluaran) year, sum(biaya) as sum')
+            ->whereYear('tanggal_pengeluaran',$request->year)
+            ->groupBy('year')
+            ->value('sum');
+       
+        } else {
+             $pengeluarans = Pengeluaran::all();
+             $total = Pengeluaran::selectRaw('year(tanggal_pengeluaran) year, sum(biaya) as sum')
+             ->groupBy('year')
+             ->value('sum');
+        }
+        return view('pengeluaran.cetak',compact('pengeluarans', 'total'));
     }
 }
