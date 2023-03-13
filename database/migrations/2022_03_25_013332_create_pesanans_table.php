@@ -22,6 +22,7 @@ class CreatePesanansTable extends Migration
             $table->integer('total_harga');
             $table->unsignedBigInteger('karyawans_id');
             $table->foreign('karyawans_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
         });
     }

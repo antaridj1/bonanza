@@ -47,7 +47,7 @@
                                     <th>Nama</th>
                                     <th>Telp</th>
                                     <th>Alamat</th>
-                                    <th>Status</th>
+                                    {{-- <th>Status</th> --}}
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -58,7 +58,7 @@
                                 <td>{{$karyawan->nama}}</td>
                                 <td>{{$karyawan->telp}}</td>
                                 <td>{{$karyawan->alamat}}</td>
-                                <td>
+                                {{-- <td>
                                     @if ($karyawan->status == 1)
                                       <a href="{{ route('karyawan.editStatus', $karyawan->id) }}" class="label label-success"
                                           data-toggle="modal" data-target="#editStatus_{{$karyawan->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Nonatifkan">
@@ -101,7 +101,7 @@
                                           </div>
                                         </div>
                                       </div>
-                                    </td>
+                                    </td> --}}
                                     <td>
                                       <div>
                                         <a href="{{ route('karyawan.delete',$karyawan->id) }}" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deletekaryawan_{{$karyawan->id}}"

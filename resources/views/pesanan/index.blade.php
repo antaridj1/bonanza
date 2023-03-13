@@ -33,10 +33,10 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-3">
                             <span>Filter data dari tanggal:</span>
                         </div>
-                        <div class="col-8 mb-3">
+                        <div class="col-8 mb-3 mr-1">
                             <form action="/pesanan">
                                 @if(request('status'))
                                     <input type="hidden" name="status" value="{{ request('status') }}">
@@ -55,11 +55,22 @@
                         </div>
                 </div>
                     <div class="d-flex">
-                        @if(auth()->user()->isOwner == true)
-                        <div class="dropdown">
-                            <a href="{{ route('pesanan.cetak') }}" class="btn btn-secondary shadow-sm mr-2">Cetak PDF</a>
+                        <div class="basic-dropdown">
+                            <div class="dropdown">
+                                @if(request('status') == "false")
+                                    <button type="button" class="btn btn-secondary shadow-sm dropdown-toggle mr-2" data-toggle="dropdown">Belum Diproses</button>
+                                @elseif (request('status') == "1")
+                                    <button type="button" class="btn btn-secondary shadow-sm dropdown-toggle mr-2" data-toggle="dropdown">Sudah Diproses</button>
+                                @else
+                                    <button type="button" class="btn btn-secondary shadow-sm dropdown-toggle mr-2" data-toggle="dropdown">Semua Status</button>
+                                @endif
+                                <div class="dropdown-menu">
+                                        <a class="dropdown-item" href="pesanan">Semua Status</a>
+                                        <a class="dropdown-item" href="pesanan?status=false">Belum Diproses</a>
+                                        <a class="dropdown-item" href="pesanan?status=1">Sudah Diproses</a>
+                                </div>
+                            </div>
                         </div>
-                        @endif
                         <div class="dropdown mr-2">
                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                               {{ (request('year'))?? 'Semua'}}
@@ -71,6 +82,11 @@
                                 @endforeach
                             </ul>
                         </div>
+                        @if(auth()->user()->isOwner == true)
+                            <div class="dropdown">
+                                <a href="{{ route('pesanan.cetak') }}" class="btn btn-secondary shadow-sm mr-2">Cetak PDF</a>
+                            </div>
+                        @endif
                         <form action="/pesanan">
                             @if(request('status'))
                                 <input type="hidden" name="status" value="{{ request('status') }}">
@@ -170,7 +186,44 @@
                                         </div>
                                         </div>
                                     </div>
+                                    @if ($pesanan->status == false)
+                                    <button type="button" class="btn btn-danger btn-xs ms-3 shadow-sm" data-toggle="modal" 
+                                        data-target="#editStatus_{{$pesanan->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah Status">
+                                        Belum Diproses
+                                    </button>
+                                    <div class="modal fade" id="editStatus_{{$pesanan->id}}">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title">Ubah Status</h4>
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form method="post" action="{{ route('pesanan.editStatus',$pesanan->id) }}">
+                                                    @method('patch')
+                                                    @csrf
+                                                    <div class="form-group"> 
+                                                        <p>Anda hanya bisa mengubah status sekali jika pesanan telah diproses. Apakah pesanan sudah diproses?</p>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                        <button type="submit" class="btn btn-primary" >Sudah Diproses </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </div>
+                                    </div>
+                                @else
+                                    <span class="label label-pill label-success btn-xs">Sudah Diproses</span>
+                                @endif
                                 </div>
+                            @else
+                                @if ($pesanan->status == false)
+                                    <span class="label label-pill label-danger btn-xs">Belum Diproses</span>
+                                @else
+                                    <span class="label label-pill label-success btn-xs">Sudah Diproses</span>
+                                @endif
                             @endif
                         </div>
                     </div>
