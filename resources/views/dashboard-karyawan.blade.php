@@ -89,6 +89,34 @@
                                                         @method('patch')
                                                         @csrf
                                                         <div class="form-group"> 
+                                                            <p>Apakah Anda akan memproses pesanan ini?</p>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary" >Proses Sekarang </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    @elseif($pesanan->status == 2)
+                                        <button type="button" class="btn btn-warning btn-xs ms-3 shadow-sm" data-toggle="modal" 
+                                                data-target="#editStatus_{{$pesanan->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah Status">
+                                                Sedang Diproses
+                                        </button>
+                                        <div class="modal fade" id="editStatus_{{$pesanan->id}}">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Ubah Status</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post" action="{{ route('pesanan.editStatus',$pesanan->id) }}">
+                                                        @method('patch')
+                                                        @csrf
+                                                        <div class="form-group"> 
                                                             <p>Anda hanya bisa mengubah status sekali jika pesanan telah diproses. Apakah pesanan sudah diproses?</p>
                                                         </div>
                                                         <div class="d-flex justify-content-between">

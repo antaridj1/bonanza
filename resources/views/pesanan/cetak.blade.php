@@ -43,7 +43,13 @@
                     <td>{{Carbon\Carbon::parse($pesanan->tanggal_pemesanan)->format('d M Y')}}</td>
                     <td>{{$pesanan->nama}}</td>
                     <td>{{$pesanan->alamat}}</td>
-                    <td>{{$pesanan->status == true ? 'Sudah Diproses' : 'Belum Diproses'}}</td>
+                   @if($pesanan->status == 0)
+                   <td>Belum Diproses</td>
+                   @elseif($pesanan->status == 2)
+                   <td>Sedang Diproses</td>
+                   @else 
+                   <td>Sudah Diproses</td>
+                   @endif
                     <td>{{number_format($pesanan->total_harga,0)}}</td>
                 </tr>
                 @endforeach

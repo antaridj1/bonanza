@@ -22,7 +22,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="card-title">Data produk</h4>
+                        <h4 class="card-title">Informasi Produk</h4>
                         <div class="d-flex justify-content-end">
                             <form action="{{route('produk.index')}}">
                                 <div class="input-group">
@@ -51,7 +51,8 @@
                                     <th>No.</th>
                                     <th>Nama</th>
                                     <th>Harga Satuan (Rp)</th>
-                                    <th>Stok</th>
+                                    <th>Stok Terjual</th>
+                                    <th>Sisa Stok</th>
                                     <th>Keterangan</th>
                                     @if(auth()->user()->isOwner == false)
                                     <th>Aksi</th>
@@ -65,6 +66,7 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$produk->nama}}</td>
                                 <td>{{number_format($produk->harga_satuan,0)}}</td>
+                                <td>{{$produk->produk_terjual !== null? $produk->produk_terjual : '0'}}</td>
                                 <td>{{$produk->stok}}</td>
                                 
                                 <td><a href="{{route('produk.index', $produk->id)}}" class="label label-primary" 

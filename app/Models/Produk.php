@@ -28,4 +28,12 @@ class produk extends Model
                         ->orWhere('harga_satuan','like','%'.$search.'%');
         });
     }
+
+    public function getProdukTerjualAttribute(){
+        $data_jumlah = DetailProduk::selectRaw('produks_id, sum(jumlah) as sum')
+        ->where('produks_id', $this->id)
+        ->groupBy('produks_id')
+        ->value('sum');
+        return $data_jumlah;
+    }
 }
