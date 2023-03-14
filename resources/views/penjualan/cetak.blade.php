@@ -15,7 +15,7 @@
             <div class="col-12">
                 <img src="{{asset('assets/images/color-logo.svg')}}" class="mb-2" width="300px" alt="">
                 <h3>Laporan Laba Rugi Tahun {{$year !== null ? $year : Carbon\Carbon::year()}}</h3>
-                <h5>Alamat: Jalan imam bonjol gang segina utara no 1</h5>
+                <h5>Alamat: Jl. Yeh Gangga I, Sudimara, Kec. Tabanan, Kabupaten Tabanan, Bali 82115</h5>
                 <h5>Telp: 0361-480998</h5>
             </div>
             
