@@ -69,7 +69,7 @@
             <div class="col-4 text-center">
                 <p><b>Mengetahui,</b></p>
                 <p style="margin-bottom:100px"><b>Pemilik UD. Bonanza Fish</b></p>
-                <p><b>.............................................</b></p>
+                <p><b>(Nengah Sukarena)</b></p>
             </div>
         </div>
     </footer>
