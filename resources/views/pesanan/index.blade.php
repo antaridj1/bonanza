@@ -61,12 +61,15 @@
                                     <button type="button" class="btn btn-secondary shadow-sm dropdown-toggle mr-2" data-toggle="dropdown">Belum Diproses</button>
                                 @elseif (request('status') == "1")
                                     <button type="button" class="btn btn-secondary shadow-sm dropdown-toggle mr-2" data-toggle="dropdown">Sudah Diproses</button>
+                                @elseif (request('status') == "2")
+                                    <button type="button" class="btn btn-secondary shadow-sm dropdown-toggle mr-2" data-toggle="dropdown">Sedang Diproses</button>
                                 @else
                                     <button type="button" class="btn btn-secondary shadow-sm dropdown-toggle mr-2" data-toggle="dropdown">Semua Status</button>
                                 @endif
                                 <div class="dropdown-menu">
                                         <a class="dropdown-item" href="pesanan">Semua Status</a>
                                         <a class="dropdown-item" href="pesanan?status=false">Belum Diproses</a>
+                                        <a class="dropdown-item" href="pesanan?status=2">Sedang Diproses</a>
                                         <a class="dropdown-item" href="pesanan?status=1">Sudah Diproses</a>
                                 </div>
                             </div>
@@ -78,13 +81,13 @@
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                 <li><a class="dropdown-item" href="{{route('pesanan.index')}}">Semua Tahun</a></li>
                                 @foreach ($years as $year)
-                                    <li><a class="dropdown-item" href="{{route('pesanan.index')}}?year={{request('year')}}">{{$year}}</a></li>
+                                    <li><a class="dropdown-item" href="{{route('pesanan.index')}}?year={{$year}}">{{$year}}</a></li>
                                 @endforeach
                             </ul>
                         </div>
                       
                             <div class="dropdown">
-                                <a href="{{ route('pesanan.cetak') }}{{request('year')? '?year='.request('year') : ''}}" class="btn btn-secondary shadow-sm mr-2">Cetak PDF</a>
+                                <a href="{{ route('pesanan.cetak') }}{{request('year')? '?year='.request('year') : ''}}{{request('status')? '?status='.request('status') : ''}}" class="btn btn-secondary shadow-sm mr-2">Cetak PDF</a>
                             </div>
                     
                         <form action="/pesanan">
@@ -203,6 +206,34 @@
                                                         @method('patch')
                                                         @csrf
                                                         <div class="form-group"> 
+                                                            <p>Apakah Anda akan memproses pesanan ini?</p>
+                                                        </div>
+                                                        <div class="d-flex justify-content-between">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                            <button type="submit" class="btn btn-primary" >Proses Sekarang </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    @elseif($pesanan->status == 2)
+                                        <button type="button" class="btn btn-warning btn-xs ms-3 shadow-sm" data-toggle="modal" 
+                                                data-target="#editStatus_{{$pesanan->id}}" data-bs-toggle="tooltip" data-bs-placement="top" title="Ubah Status">
+                                                Sedang Diproses
+                                        </button>
+                                        <div class="modal fade" id="editStatus_{{$pesanan->id}}">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Ubah Status</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form method="post" action="{{ route('pesanan.editStatus',$pesanan->id) }}">
+                                                        @method('patch')
+                                                        @csrf
+                                                        <div class="form-group"> 
                                                             <p>Anda hanya bisa mengubah status sekali jika pesanan telah diproses. Apakah pesanan sudah diproses?</p>
                                                         </div>
                                                         <div class="d-flex justify-content-between">
@@ -219,10 +250,12 @@
                                     @endif
                                 </div>
                             @else
-                                @if ($pesanan->status == false)
+                                @if ($pesanan->status == 0)
                                     <span class="label label-pill label-danger btn-xs">Belum Diproses</span>
-                                @else
+                                @elseif($pesanan->status == 1)
                                     <span class="label label-pill label-success btn-xs">Sudah Diproses</span>
+                                @else 
+                                <span class="label label-pill label-warning btn-xs">Sedang Diproses</span>
                                 @endif
                             @endif
                         </div>

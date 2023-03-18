@@ -15,7 +15,7 @@
             <div class="col-12">
                 <img src="{{asset('assets/images/color-logo.svg')}}" class="mb-2" width="300px" alt="">
                 <h3>Laporan Pengeluaran {{request('year') ? 'Tahun '.request('year') : ''}}</h3>
-                <h5>Alamat: Jalan imam bonjol gang segina utara no 1</h5>
+                <h5>Alamat: Jl. Yeh Gangga I, Sudimara, Kec. Tabanan, Kabupaten Tabanan, Bali 82115</h5>
                 <h5>Telp: 0361-480998</h5>
             </div>
             
@@ -59,7 +59,7 @@
         <div class="col-4 text-center">
             <p><b>Mengetahui,</b></p>
             <p style="margin-bottom:100px"><b>Pemilik UD. Bonanza Fish</b></p>
-            <p><b>.............................................</b></p>
+            <p><b>(Nengah Sukarena)</b></p>
         </div>
     </div>
 </footer>

@@ -96,10 +96,18 @@ class PesananController extends Controller
     }
 
     public function update(Pesanan $pesanan)
-    {
-        Pesanan::where('id',$pesanan->id)->update([
-            'status' => 1
-        ]);
+    {   
+        if($pesanan->status == 0){
+             Pesanan::where('id',$pesanan->id)->update([
+                'status' => 2
+            ]);
+        }
+        elseif ($pesanan->status == 2) {
+            Pesanan::where('id',$pesanan->id)->update([
+                'status' => 1
+            ]);
+        }
+       
         return redirect('pesanan')
             ->with('status','success')
             ->with('message','Berhasil mengedit data');
@@ -121,16 +129,18 @@ class PesananController extends Controller
     public function cetak(Request $request){
 
         if($request->year){
-            $pesanans = Pesanan::whereYear('tanggal_pemesanan', $request->year);
+            $pesanans = Pesanan::whereYear('tanggal_pemesanan',$request->year)->orderBy('created_at','DESC')->filter(request(['status','search','daterange']))->get();
 
             $total = Pesanan::selectRaw('year(tanggal_pemesanan) year, sum(total_harga) as sum')
+            ->filter(request(['status','search','daterange']))
             ->whereYear('tanggal_pemesanan',$request->year)
             ->groupBy('year')
             ->value('sum');
         } else {
-             $pesanans = Pesanan::all();
+            $pesanans = Pesanan::orderBy('created_at','DESC')->filter(request(['status','search','daterange']))->get();
              
              $total = Pesanan::selectRaw('sum(total_harga) as sum')
+             ->filter(request(['status','search','daterange']))
              ->value('sum');
         }
        
