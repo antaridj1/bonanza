@@ -282,7 +282,7 @@
                                             <td>{{ $produk->jumlah }} Kg</td>
                                             <td class="text-right">{{ number_format($produk->produk->harga_satuan,0) }}</td>
                                             @php
-                                                $tot = $produk->produk->harga_satuan * $produk->jumlah;
+                                                $tot = $produk->produk->harga_satuan * $produk->jumlah / 10;
                                             @endphp
                                             <td class="text-right">{{ number_format($tot,0) }}</td>
                                         </tr>
