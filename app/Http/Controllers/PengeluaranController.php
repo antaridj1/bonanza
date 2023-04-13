@@ -85,7 +85,7 @@ class PengeluaranController extends Controller
 
     public function cetak(Request $request){
         if($request->year){
-            $pengeluarans = Pengeluaran::whereYear('tanggal_pengeluaran', $request->year);
+            $pengeluarans = Pengeluaran::whereYear('tanggal_pengeluaran', $request->year)->get();
 
             $total = Pengeluaran::selectRaw('year(tanggal_pengeluaran) year, sum(biaya) as sum')
             ->whereYear('tanggal_pengeluaran',$request->year)
